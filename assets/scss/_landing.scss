@@ -1,0 +1,433 @@
+html,body{
+  width: 100%;
+  height: 100%;
+}
+//wrapper
+.wrapper{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  @include size(100%,100%);
+  .page-selectvideo &,
+  .page-form &,
+  .page-videolist &{
+    background: url("../images/selectvideo-bg.jpg") center center no-repeat;
+    background-size: cover;
+  }
+  .page-qa &{
+    background: url("../images/bg.jpg") center center no-repeat;
+    background-size: cover;
+  }
+}
+
+.content{
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 48%;
+  @include transform(translate(-50%,-50%));
+  width: 100%;
+}
+.logo{
+  @include size(2.75rem,1.02rem);
+  margin: 0 auto 0.4rem;
+}
+.btn{
+  color: #fff;
+  background: #000;
+  padding: 0.15rem 0;
+  margin: 0 auto;
+  width: 2.2rem;
+  text-align: center;
+  font-size: 0.3rem;
+  letter-spacing: 1px;
+  a{
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.container{
+  box-sizing: border-box;
+  @include size(6.39rem,8.91rem);
+  padding: 1.2rem 0.6rem;
+  background: url("../images/layer-bg.png") no-repeat;
+  background-size: 100%;
+  margin: 0 auto;
+}
+//welcome pin
+.pin-welcome{
+  text-align: center;
+  p{
+    margin-bottom: 0.4rem;
+  }
+  .title{
+    font-size: 0.42rem;
+    margin-bottom: 0.6rem;
+  }
+  .subtitle{
+    font-size: 0.28rem;
+  }
+  .t1{
+    font-size: 0.26rem;
+  }
+  .t2{
+    font-size: 0.22rem;
+    color: #5e5e5e;
+  }
+  .btn{
+    margin-bottom: 0.25rem;
+  }
+  .showrules{
+    font-size: 0.22rem;
+    text-decoration: underline;
+  }
+
+}
+
+//qa list
+.qa-list{
+  display: none;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 0.3rem;
+  &.qa-list{
+    display: block;
+  }
+  .ordernum{
+    display: inline-block;
+    margin-right: 0.1rem;
+    font-size: 0.5rem;
+    font-style: italic;
+  }
+  .ask{
+    text-align: left;
+    font-size: 0.34rem;
+    margin-bottom: 1rem;
+  }
+  .answer{
+    text-align: left;
+    font-size: 0.26rem;
+    .item{
+      margin-bottom: 0.3rem;
+      padding: 0.2rem 0 0.2rem 0.05rem;
+      &.selected{
+        //background: url("../images/icon-selected.png") 6px center no-repeat;
+        //background-size: auto 40%;
+      }
+      &.unselect{
+        color: #d5d5d5;
+      }
+      .series{
+        margin-right:0.3rem;
+      }
+    }
+  }
+  .btn-go{
+    font-size: 0.3rem;
+    margin-top: 0.5rem;
+  }
+}
+
+
+//for page selectvideo
+.role-content{
+  font-size: 0.28rem;
+  text-align: center;
+  p{
+    margin: 0.4rem 0;
+  }
+  .t1{
+    font-size: 0.52rem;
+    font-weight: bold;
+  }
+  .t2{
+    strong{
+      display: inline-block;
+      margin-left: 0.1rem;
+      font-size: 0.3rem;
+      font-weight: bold;
+    }
+  }
+  .t3,.t4{
+    font-size: 0.26rem;
+    line-height: 1.8;
+  }
+  .t4{
+    margin-bottom: 0.8rem;
+  }
+  .quotation{
+    display: inline-block;
+    @include size(0.24rem,0.24rem);
+    margin: 0 0.1rem;
+    background: url("../images/icon-quotation.png") no-repeat;
+    background-size: 100%;
+    &.r-quotation{
+      background-position: 0 100%;
+    }
+  }
+
+}
+
+//for video-block
+.page-selectvideo{
+  .video-block{
+    position: relative;
+    z-index: 100;
+    @include size(5.54rem,3.09rem);
+    margin: 0.5rem auto 0.5rem;
+    background: #000;
+    display: block;
+    //padding: 1px;
+    .videoplayer{
+      background: #000;
+    }
+    .tvp_poster_img{
+      background-size: cover;
+    }
+    &.vb-0{
+      .tvp_poster_img{
+        background-image: url("../images/p-tangyan.jpg") !important;
+      }
+    }
+    &.vb-1{
+      .tvp_poster_img{
+        background-image: url("../images/p-liweiyi.jpg") !important;
+      }
+    }
+    &.vb-2{
+      .tvp_poster_img{
+        background-image: url("../images/p-tanyuanyuan.jpg") !important;
+      }
+    }
+    &.vb-3{
+      .tvp_poster_img{
+        background-image: url("../images/p-chenman.jpg") !important;
+      }
+    }
+    &.vb-4{
+      .tvp_poster_img{
+        background-image: url("../images/p-oukaichun.jpg") !important;
+      }
+    }
+    &.vb-5{
+      .tvp_poster_img{
+        background-image: url("../images/p-huangyunling.jpg") !important;
+      }
+    }
+  }
+}
+
+//apply flex layout
+.video-wrap{
+  &.show{
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.video-block{
+  position: relative;
+  background: #000;
+  .btn-play{
+    position: relative;
+    @include size(0.8rem,0.8rem);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: #fff 2px solid;
+    border-radius: 100%;
+    text-align: center;
+    margin: 0 auto;
+    &:after{
+      content: '';
+      display: block;
+      position: absolute;
+      left: 55%;
+      top: 50%;
+      @include transform(translate(-50%,-50%));
+      @include size(0,0);
+      border-top:transparent 0.2rem solid;
+      border-bottom:transparent 0.2rem solid;
+      border-left:#fff 0.3rem solid;
+    }
+  }
+}
+
+//for page-videolist
+.page-videolist{
+  .slogan{
+    //@include size(4.29rem,0.31rem);
+    margin: 0.4rem auto;
+    font-size: 0.52rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .video-list{
+    position: relative;
+    @include size(6.5rem,7.25rem);
+    box-sizing: border-box;
+    margin: 0 auto 0.7rem;
+    border: #fff 4px solid;
+    color: #fff;
+    background: #fff;
+    .panel{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+    }
+    .r-panel{
+      left: 50%;
+    }
+    .video-block{
+      position: relative;
+      height: 33%;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      border: #fff 4px solid;
+      line-height: 1;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #fff;
+      .inner{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%,-50%));
+      }
+      .des{
+        position: absolute;
+        font-size: 0.22rem;
+        bottom: 0.1rem;
+        left: 0;
+        width: 100%;
+      }
+      .title,.name{
+        margin-bottom: 0.15rem;
+      }
+      &.video-block-1{
+        height: 30%;
+        background-image: url("../images/p-huangyunling.jpg");
+      }
+      &.video-block-2{
+        height: 30%;
+        background-image: url("../images/p-oukaichun.jpg");
+        background-position: right;
+      }
+      &.video-block-6{
+        height: 40%;
+        background-image: url("../images/p-chenman.jpg");
+        background-position: left;
+      }
+      &.video-block-3{
+        height: 40%;
+        background-image: url("../images/p-tangyan.jpg");
+      }
+      &.video-block-4{
+        height: 30%;
+        background-image: url("../images/p-liweiyi.jpg");
+      }
+      &.video-block-5{
+        height: 30%;
+        background-image: url("../images/p-tanyuanyuan.jpg");
+      }
+      .btn-play{
+        @include size(0.6rem,0.6rem);
+        background: rgba(0,0,0,0.5);
+        &:after{
+          border-top:transparent 0.15rem solid;
+          border-bottom:transparent 0.15rem solid;
+          border-left:#fff 0.2rem solid;
+        }
+      }
+
+    }
+  }
+  .btn{
+    width: 4.3rem;
+  }
+}
+
+
+//for form page
+input[type="text"],
+input[type="tel"]{
+  border: #a3a7a3 1px solid;
+  padding: 0.2rem;
+  width: 60vw;
+}
+.page-form .title{
+  text-align: center;
+  font-size: 0.34rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+  line-height: 1.8;
+}
+#form-contact{
+  text-align: center;
+  font-size: 0.28rem;
+  label{
+    display: inline-block;
+    margin-right: 0.1rem;
+  }
+  .input-box{
+    position: relative;
+    margin-bottom: 0.8rem;
+  }
+  input[type="text"],
+  input[type="tel"]{
+    font-size: 0.28rem;
+  }
+}
+.error {
+  position: absolute;
+  width: 100%;
+  bottom: -0.4rem;
+  font-size: 0.24rem;
+  color: #f00;
+}
+
+
+//override tencent video
+.videoplayer{
+  width: 100%;
+  height: 100%;
+  .tvp_overlay_play{
+    //border-radius: 100%;
+    position: absolute;
+    width: .8rem;
+    height: .8rem;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%,-50%));
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    text-align: center;
+    margin: 0 !important;
+  }
+  .tvp_overlay_play_try .tvp_button_play,
+  .tvp_overlay_play .tvp_button_play{
+    display: block;
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    @include transform(translate(-50%,-50%));
+    @include size(0,0);
+    border: none;
+    border-top:transparent 0.2rem solid;
+    border-bottom:transparent 0.2rem solid;
+    border-left:#fff 0.3rem solid;
+  }
+}
