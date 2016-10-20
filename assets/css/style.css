@@ -568,3 +568,25 @@ html, body {
   color: #fff;
   text-decoration: none;
 }
+
+#lotteryContainer {
+  position: relative;
+  width: 4.5rem;
+  height: 2.28rem;
+}
+#lotteryContainer #lottery {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+#lotteryContainer .prize {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url("../images/prize-bg.png") no-repeat;
+  background-size: 100%;
+}

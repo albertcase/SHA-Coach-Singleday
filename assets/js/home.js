@@ -46,7 +46,7 @@
             var self=this;
 
 
-            var ratio = window.innerWidth/640;
+            var ratio = window.innerWidth/750;
             var paintCanvas = document.getElementById('lottery');
             paintCanvas.width = parseInt(450*ratio);
             paintCanvas.height = parseInt(228*ratio);
@@ -59,32 +59,37 @@
                 ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
             };
 
+            var offLeft  = $('#lottery').offset().left;
+            var offTop  = $('#lottery').offset().top;
+
             var  paint= new Hammer($('#lottery')[0], {});
             ctx.beginPath();
-            ctx.lineWidth = 18;
+            ctx.lineWidth = 30;
             paintCanvas.addEventListener('touchstart',function(ev){
-                ctx.moveTo(ev.changedTouches[0].pageX-paintCanvas.offsetLeft,ev.changedTouches[0].pageY-paintCanvas.offsetTop);
+                //console.log(ev);
+                ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
             });
 
             var times = 0,
                 enableRub = true;
             paint.on('pan', function(ev) {
 
-
-                if(!enableRub) return;
+                //if(!enableRub) return;
                 //if($('.p5-finger').length){
                 //    $('.p5-finger').remove();
                 //}
                 ctx.globalCompositeOperation = 'destination-out';
-                //ctx.strokeStyle = '#000';
-                ctx.lineTo(ev.center.x-paintCanvas.offsetLeft,ev.center.y-paintCanvas.offsetTop);
+                ctx.strokeStyle = '#000';
+                ctx.lineTo(ev.center.x-offLeft,ev.center.y-offTop);
+                console.log(ev);
                 ctx.stroke();
                 var percent = self.getTransparentPercent(ctx,paintCanvas.width,paintCanvas.height);
+                console.log(percent);
                 //times++;
                 if(percent>60){
                     ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
 console.log('yes');
-                    enableRub = false;
+                    //enableRub = false;
                 }
             });
         },

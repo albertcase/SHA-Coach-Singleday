@@ -53,6 +53,24 @@ html,body{
 
 
 //for lottery
-#lottery{
-
+#lotteryContainer{
+  position: relative;
+  @include size(4.5rem,2.28rem);
+  #lottery{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    //@include size(100%,100%);
+  }
+  .prize{
+    position: absolute;
+    z-index: 1;
+    @include size(100%,100%);
+    top: 0;
+    left: 0;
+    background: url("../images/prize-bg.png") no-repeat;
+    background-size: 100%;
+  }
 }
+
