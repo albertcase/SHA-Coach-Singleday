@@ -23,21 +23,67 @@ html,body{
 
 
 /*For content*/
+.logo{
+  @include size(2.75rem,1.02rem);
+  margin: 0 auto 0.4rem;
+  padding-top: 0.4rem;
+}
 .content{
   box-sizing: border-box;
   @include size(6.33rem,6.57rem);
   //padding: 1.2rem 0.6rem;
   background: url("../images/cbg.png") no-repeat;
   background-size: 100%;
+  margin: 0.7rem auto 0;
+  padding: 0.6rem 0.5rem 0.7rem;
+  text-align: center;
+  .title{
+    font-size: 0.31rem;
+    font-weight: bold;
+  }
+  .line{
+    width: 0.6rem;
+    margin: 0.35rem auto;
+  }
+  .t1{
+    font-size: 0.64rem;
+    font-weight: bold;
+    margin-bottom: 0.6rem;
+  }
+}
+
+//for lottery
+#lotteryContainer{
+  position: relative;
+  @include size(4.5rem,2.28rem);
   margin: 0 auto;
+  #lottery{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    //opacity: 0;
+    @include size(100%,100%);
+  }
+  .prize{
+    position: absolute;
+    z-index: 1;
+    @include size(100%,100%);
+    line-height: 2.28rem;
+    top: 0;
+    left: 0;
+    font-size: 0.52rem;
+    font-weight: bold;
+    color: #2c2b2b;
+    background: url("../images/prize-bg.png") no-repeat;
+    background-size: 100%;
+  }
 }
-.logo{
-  @include size(2.75rem,1.02rem);
-  margin: 0 auto 0.4rem;
-}
+
+
 .btn{
-  color: #fff;
-  background: #000;
+  color: #2c2b2b;
+  background: #fff;
   padding: 0.15rem 0;
   margin: 0 auto;
   width: 2.2rem;
@@ -51,26 +97,11 @@ html,body{
   }
 }
 
-
-//for lottery
-#lotteryContainer{
-  position: relative;
-  @include size(4.5rem,2.28rem);
-  #lottery{
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    //@include size(100%,100%);
-  }
-  .prize{
-    position: absolute;
-    z-index: 1;
-    @include size(100%,100%);
-    top: 0;
-    left: 0;
-    background: url("../images/prize-bg.png") no-repeat;
-    background-size: 100%;
+//for btn-collection
+.btn-collection{
+  text-align: center;
+  .btn{
+    display: inline-block;
+    margin: 0.6rem 0.1rem;
   }
 }
-

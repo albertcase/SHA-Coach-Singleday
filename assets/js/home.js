@@ -59,8 +59,8 @@
                 ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
             };
 
-            var offLeft  = $('#lottery').offset().left;
-            var offTop  = $('#lottery').offset().top;
+            var offLeft  = $('#lotteryContainer').offset().left;
+            var offTop  = $('#lotteryContainer').offset().top;
 
             ctx.beginPath();
             ctx.lineWidth = 30;
