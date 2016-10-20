@@ -13,11 +13,12 @@ var rename = require('gulp-rename'),
 
 //Define the app path
 var path = {
-    all:['./template/*.html','./assets/css/*.css','./assets/js/*.js','./assets/js/lib/*.js'],
+    all:['./*.html','./assets/css/*.css','./assets/js/*.js','./assets/js/lib/*.js'],
     template:['./template/*.html'],
     css:['./assets/css/*.css'],
-    js:['./assets/js/lib/zepto.min.js','./assets/js/rem.js','./assets/js/lib/cookie.js','./assets/js/common.js','./assets/js/wxshare.js','./assets/js/qa.js'],
-    staticFolder:['./assets/images','./assets/font','./assets/video']
+    js:['./assets/js/lib/zepto.min.js','./assets/js/rem.js','./assets/js/lib/hammer.min.js','./assets/js/common.js','./assets/js/home.js'],
+    images:['./assets/images/*'],
+    staticFolder:['./assets/images/*','./assets/font/*','./assets/video/*']
 };
 // Browser-sync
 gulp.task('browser-sync', function() {
@@ -38,9 +39,9 @@ gulp.task('clean', function() {
 
 // Copy all static images
 gulp.task('images', ['clean'], function() {
-    return gulp.src(path.staticFolder)
+    return gulp.src(path.images)
         // Pass in options to the task
-        .pipe(imagemin({optimizationLevel: 5}))
+        //.pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -64,28 +65,14 @@ gulp.task('scripts',['clean'], function() {
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });
-gulp.task('scripts_vjs', function() {
-    return gulp.src(path.selectvjs)
-        .pipe(concat('vjs2.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('vjs.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
-});
-gulp.task('scripts_formjs', function() {
-    return gulp.src(path.formjs)
-        .pipe(concat('form.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('form.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
-});
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch(path.js, ['scripts','scripts_vjs','scripts_formjs']);
+    gulp.watch(path.js, ['scripts']);
     gulp.watch(path.css,['css']);
+    gulp.watch(path.images,['images']);
+    gulp.watch(path.template,['css']);
 });
 
 // Default Task
-gulp.task('default', ['scripts', 'css','watch','browser-sync']);
+gulp.task('default', ['watch', 'scripts', 'images','css','browser-sync']);
