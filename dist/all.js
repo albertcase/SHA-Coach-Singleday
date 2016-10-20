@@ -325,7 +325,6 @@ $(document).ready(function(){
             var offLeft  = $('#lottery').offset().left;
             var offTop  = $('#lottery').offset().top;
 
-            //var  paint= new Hammer($('#lottery')[0], {});
             ctx.beginPath();
             ctx.lineWidth = 30;
             paintCanvas.addEventListener('touchstart',function(ev){
@@ -340,14 +339,12 @@ $(document).ready(function(){
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.strokeStyle = '#000';
                 ctx.lineTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY-offTop);
-                console.log(ev);
                 ctx.stroke();
                 var percent = self.getTransparentPercent(ctx,paintCanvas.width,paintCanvas.height);
-                console.log(percent);
                 //times++;
-                if(percent>60){
+                if(percent>80){
                     ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
-console.log('yes');
+                    console.log('yes');
                     enableRub = false;
                 }
             });
