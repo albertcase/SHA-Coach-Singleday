@@ -62,7 +62,7 @@
             var offLeft  = $('#lottery').offset().left;
             var offTop  = $('#lottery').offset().top;
 
-            var  paint= new Hammer($('#lottery')[0], {});
+            //var  paint= new Hammer($('#lottery')[0], {});
             ctx.beginPath();
             ctx.lineWidth = 30;
             paintCanvas.addEventListener('touchstart',function(ev){
@@ -72,15 +72,11 @@
 
             var times = 0,
                 enableRub = true;
-            paint.on('pan', function(ev) {
-
-                //if(!enableRub) return;
-                //if($('.p5-finger').length){
-                //    $('.p5-finger').remove();
-                //}
+            paintCanvas.addEventListener('touchmove', function(ev) {
+                if(!enableRub) return;
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.strokeStyle = '#000';
-                ctx.lineTo(ev.center.x-offLeft,ev.center.y-offTop);
+                ctx.lineTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY-offTop);
                 console.log(ev);
                 ctx.stroke();
                 var percent = self.getTransparentPercent(ctx,paintCanvas.width,paintCanvas.height);
@@ -89,7 +85,7 @@
                 if(percent>60){
                     ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
 console.log('yes');
-                    //enableRub = false;
+                    enableRub = false;
                 }
             });
         },
