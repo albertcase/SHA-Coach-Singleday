@@ -11,16 +11,53 @@
 
         //if user follow coach weixin public account
         this.isFollow = true;
+        //is get the first coupon,111 or 222
+        this.isGetFirst = false;
+        //is get the double coupon,333
+        this.isGetDouble = false;
+        this.couponValue = 111;
     };
     controller.prototype = {
         init:function(){
             var self = this;
-            self.initCanvas();
+            //    api(isgetfirst)
+            if(self.isGetFirst){
+                //    show the get number
+
+            }else{
+                self.initCanvas();
+            }
+            self.bindEvent();
+
         },
         //bind all element event,such as click, touchstart
         bindEvent:function(){
             var self = this;
+            $('.btn-getdouble').on('touchstart',function(){
+                self.initCanvas();
+            });
 
+        },
+
+        //getCurrentCopon
+        getCoupon:function(value){
+
+            console.log('领取'+value+'金额');
+        },
+
+        //set coupon number
+        updateCouponNumber:function(isdouble){
+            var self = this;
+            $('.prize').addClass('show');
+            if(isdouble){
+                self.couponValue = 333;
+            }else{
+                var initCoupon = [111,222];
+                var r = Math.round(Math.random());
+                self.couponValue = initCoupon[r];
+            }
+            //show the money in site
+            $('.prize .num').html(self.couponValue);
         },
 
         //paint the canvas and then show the money,such as 111,222,and then share success,show 333
@@ -42,7 +79,7 @@
             }
             return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
         },
-        initCanvas:function(tEle,tImg,bEle,bImg){
+        initCanvas:function(){
             var self=this;
 
 
@@ -57,6 +94,7 @@
             img.height = parseInt(228*ratio);
             img.onload = function(){
                 ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
+                self.updateCouponNumber(self.isGetDouble);
             };
 
             var offLeft  = $('#lotteryContainer').offset().left;
@@ -81,6 +119,7 @@
                 //times++;
                 if(percent>80){
                     ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
+                    $('.btn-collection .btn').removeClass('disabled');
                     console.log('yes');
                     enableRub = false;
                 }

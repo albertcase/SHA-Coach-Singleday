@@ -32,10 +32,10 @@ $delay-7: 2800ms;
 $delay-8: 3200ms;
 $delay-9: 3600ms;
 
-@font-face {
-  font-family: 'Clarendon';
-  src: url('../font/Clarendon-Light.otf')  format('truetype');/* Safari, Android, iOS */
-}
+//@font-face {
+//  font-family: 'Clarendon';
+//  src: url('../font/Clarendon-Light.otf')  format('truetype');/* Safari, Android, iOS */
+//}
 
 @media all and (orientation: landscape){
 
@@ -57,9 +57,9 @@ body {
   font-size: .24rem;
   color: #000;
 }
-.font-en{
-  font-family: 'Clarendon',serif;
-}
+//.font-en{
+//  font-family: 'Clarendon',serif;
+//}
 * {
   -webkit-touch-callout:none;
   -webkit-text-size-adjust: 100%;

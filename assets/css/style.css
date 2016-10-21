@@ -58,11 +58,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-@font-face {
-  font-family: 'Clarendon';
-  src: url("../font/Clarendon-Light.otf") format("truetype");
-  /* Safari, Android, iOS */
-}
 @media all and (orientation: landscape) {
   html {
     font-size: calc(100vh / 375 * 50);
@@ -82,10 +77,6 @@ body {
   line-height: 1.5;
   font-size: .24rem;
   color: #000;
-}
-
-.font-en {
-  font-family: 'Clarendon',serif;
 }
 
 * {
@@ -537,6 +528,13 @@ html, body {
   width: 100%;
 }
 
+.pin {
+  display: none;
+}
+.pin.current {
+  display: block;
+}
+
 /*For content*/
 .logo {
   width: 2.75rem;
@@ -584,6 +582,7 @@ html, body {
   height: 100%;
 }
 #lotteryContainer .prize {
+  opacity: 0;
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -596,6 +595,15 @@ html, body {
   color: #2c2b2b;
   background: url("../images/prize-bg.png") no-repeat;
   background-size: 100%;
+}
+#lotteryContainer .prize.show {
+  opacity: 1;
+}
+#lotteryContainer .prize .num {
+  font-size: 0.6rem;
+  font-weight: normal;
+  font-style: italic;
+  letter-spacing: 10px;
 }
 
 .btn {
@@ -636,4 +644,23 @@ html, body {
   background-image: -moz-linear-gradient(#e7e7e7, #ffffff);
   background-image: -webkit-linear-gradient(#e7e7e7, #ffffff);
   background-image: linear-gradient(#e7e7e7, #ffffff);
+}
+
+.pin1 .p1-title {
+  text-align: center;
+  font-size: 0.36rem;
+  margin: 1rem auto 0.8rem;
+}
+.pin1 .qrcode {
+  width: 3.72rem;
+  height: 3.72rem;
+  margin: 0 auto 0.8rem;
+}
+.pin1 .next {
+  color: #2c2b2b;
+  font-size: 0.3rem;
+  text-decoration: underline;
+  width: 2rem;
+  margin: 0 auto;
+  text-align: center;
 }

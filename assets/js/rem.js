@@ -10,18 +10,18 @@
         dpr = 2;
     }
     docEl.dataset.dpr = dpr;
-    var metaEl = doc.createElement('meta');
-    metaEl.name = 'viewport';
-    metaEl.content = 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale;
-    docEl.firstElementChild.appendChild(metaEl);
+    //var metaEl = doc.createElement('meta');
+    //metaEl.name = 'viewport';
+    //metaEl.content = 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale;
+    //docEl.firstElementChild.appendChild(metaEl);
     var recalc = function () {
         var width = docEl.clientWidth,
 			height = docEl.clientHeight;
         if (width / dpr > 750) {
             width = 750 * dpr;
         }
-				if(width/height>750/1207){
-					docEl.style.fontSize = 100 * (height / 1207) + 'px';
+				if(width/height>750/1204){
+					docEl.style.fontSize = 100 * (height / 1204) + 'px';
 
 				}else{
 					docEl.style.fontSize = 100 * (width / 750) + 'px';

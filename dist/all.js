@@ -12,18 +12,18 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         dpr = 2;
     }
     docEl.dataset.dpr = dpr;
-    var metaEl = doc.createElement('meta');
-    metaEl.name = 'viewport';
-    metaEl.content = 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale;
-    docEl.firstElementChild.appendChild(metaEl);
+    //var metaEl = doc.createElement('meta');
+    //metaEl.name = 'viewport';
+    //metaEl.content = 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale;
+    //docEl.firstElementChild.appendChild(metaEl);
     var recalc = function () {
         var width = docEl.clientWidth,
 			height = docEl.clientHeight;
         if (width / dpr > 750) {
             width = 750 * dpr;
         }
-				if(width/height>750/1207){
-					docEl.style.fontSize = 100 * (height / 1207) + 'px';
+				if(width/height>750/1204){
+					docEl.style.fontSize = 100 * (height / 1204) + 'px';
 
 				}else{
 					docEl.style.fontSize = 100 * (width / 750) + 'px';
@@ -250,10 +250,6 @@ $(document).ready(function(){
 	//close alert pop
 	$('body').on('touchstart','.btn-alert-ok',function(){
 		Common.alertBox.remove();
-		//for form page
-		if($('body').hasClass('page-form') && $(this).parent().find('.msg').html() == '你已经参与抽奖'){
-			window.location.href='/';
-		}
 	});
 
 });
@@ -274,16 +270,53 @@ $(document).ready(function(){
 
         //if user follow coach weixin public account
         this.isFollow = true;
+        //is get the first coupon,111 or 222
+        this.isGetFirst = false;
+        //is get the double coupon,333
+        this.isGetDouble = false;
+        this.couponValue = 111;
     };
     controller.prototype = {
         init:function(){
             var self = this;
-            self.initCanvas();
+            //    api(isgetfirst)
+            if(self.isGetFirst){
+                //    show the get number
+
+            }else{
+                self.initCanvas();
+            }
+            self.bindEvent();
+
         },
         //bind all element event,such as click, touchstart
         bindEvent:function(){
             var self = this;
+            $('.btn-getdouble').on('touchstart',function(){
+                self.initCanvas();
+            });
 
+        },
+
+        //getCurrentCopon
+        getCoupon:function(value){
+
+            console.log('领取'+value+'金额');
+        },
+
+        //set coupon number
+        updateCouponNumber:function(isdouble){
+            var self = this;
+            $('.prize').addClass('show');
+            if(isdouble){
+                self.couponValue = 333;
+            }else{
+                var initCoupon = [111,222];
+                var r = Math.round(Math.random());
+                self.couponValue = initCoupon[r];
+            }
+            //show the money in site
+            $('.prize .num').html(self.couponValue);
         },
 
         //paint the canvas and then show the money,such as 111,222,and then share success,show 333
@@ -305,7 +338,7 @@ $(document).ready(function(){
             }
             return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
         },
-        initCanvas:function(tEle,tImg,bEle,bImg){
+        initCanvas:function(){
             var self=this;
 
 
@@ -320,6 +353,7 @@ $(document).ready(function(){
             img.height = parseInt(228*ratio);
             img.onload = function(){
                 ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
+                self.updateCouponNumber(self.isGetDouble);
             };
 
             var offLeft  = $('#lotteryContainer').offset().left;
@@ -344,6 +378,7 @@ $(document).ready(function(){
                 //times++;
                 if(percent>80){
                     ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
+                    $('.btn-collection .btn').removeClass('disabled');
                     console.log('yes');
                     enableRub = false;
                 }
