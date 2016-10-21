@@ -10,7 +10,7 @@
         this.isLogged = false;
 
         //if user follow coach weixin public account
-        this.isFollow = true;
+        this.isFollow = false;
         //is get the first coupon,111 or 222
         this.isGetFirst = false;
         //is get the double coupon,333
@@ -21,18 +21,37 @@
         init:function(){
             var self = this;
             //    api(isgetfirst)
-            if(self.isGetFirst){
-                //    show the get number
-
+            if(self.isFollow){
+                gotoPin(1);
+                if(self.isGetFirst){
+                    //    show the get number
+                    self.updateCouponNumber(self.isGetDouble);
+                }else{
+                    self.initCanvas();
+                }
             }else{
-                self.initCanvas();
+                gotoPin(0);
+                if(self.isGetFirst){
+                    //    show the get number
+                    self.updateCouponNumber(self.isGetDouble);
+                }else{
+                    console.log('click next btn');
+                }
             }
+
             self.bindEvent();
 
         },
         //bind all element event,such as click, touchstart
         bindEvent:function(){
             var self = this;
+
+            //next button to paint page
+            $('.next').on('touchstart',function(){
+                gotoPin(1);
+                self.initCanvas();
+            });
+
             $('.btn-getdouble').on('touchstart',function(){
                 self.initCanvas();
             });
@@ -92,6 +111,7 @@
             img.src = '/dist/images/mask.jpg';
             img.width = parseInt(450*ratio);
             img.height = parseInt(228*ratio);
+            console.log(img);
             img.onload = function(){
                 ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
                 self.updateCouponNumber(self.isGetDouble);
