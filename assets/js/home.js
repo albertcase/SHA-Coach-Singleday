@@ -159,6 +159,7 @@
         img.height = parseInt(228*ratio);
         img.onload = function(){
             ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
+
         };
         var offLeft  = $('#lotteryContainer').offset().left;
         var offTop  = $('#lotteryContainer').offset().top;

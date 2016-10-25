@@ -19,13 +19,14 @@
 			height = docEl.clientHeight;
         if (width / dpr > 750) {
             width = 750 * dpr;
-        }
-				if(width/height>750/1204){
-					docEl.style.fontSize = 100 * (height / 1204) + 'px';
-
-				}else{
-					docEl.style.fontSize = 100 * (width / 750) + 'px';
-				}
+        };
+        docEl.style.fontSize = 100 * (width / 750) + 'px';
+        //if(width/height>750/1204){
+        //    docEl.style.fontSize = 100 * (height / 1204) + 'px';
+        //
+        //}else{
+        //
+        //}
       };
     recalc();
     if (!doc.addEventListener) return;
