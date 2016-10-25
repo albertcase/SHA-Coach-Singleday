@@ -10,7 +10,7 @@
         this.isLogged = false;
 
         //if user follow coach weixin public account
-        this.isFollow = false;
+        this.isFollow = true;
         //is get the first coupon,111 or 222
         this.isGetFirst = false;
         //is get the double coupon,333
