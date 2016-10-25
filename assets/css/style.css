@@ -528,13 +528,6 @@ html, body {
   width: 100%;
 }
 
-.pin {
-  display: none;
-}
-.pin.current {
-  display: block;
-}
-
 /*For content*/
 .logo {
   width: 2.75rem;
@@ -657,10 +650,13 @@ html, body {
   margin: 0 auto 0.8rem;
 }
 .pin1 .next {
-  color: #2c2b2b;
-  font-size: 0.3rem;
-  text-decoration: underline;
   width: 2rem;
   margin: 0 auto;
   text-align: center;
+}
+.pin1 .next a {
+  display: block;
+  color: #2c2b2b;
+  font-size: 0.3rem;
+  text-decoration: underline;
 }

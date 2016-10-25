@@ -261,6 +261,69 @@ $(document).ready(function(){
 
 
 
+/*All the api collection*/
+Api = {
+
+//{"status":1,"msg":null}
+//{"status":1,"msg":111}
+//{"status":1,"msg":222}
+    /*
+    * logged,status is 0 or 1,and then show different msg,'111','222','333'
+    * */
+    isLogin:function(callback){
+        $.ajax({
+            url:'/api/islogin',
+            type:'POST',
+            dataType:'json',
+            success:function(data){
+                return callback(data);
+            }
+        });
+    },
+//{"status":1,"msg":[{"cardId":"pKCDxjjMu_A_OlyidjNNeQ2Hqdrk","cardExt":{"code":"","openid":"","timestamp":1477367798,"signature":"444050b2c89f478544e5ab5ef4ed63d3b9337f89"}}]}
+    /*
+    * get the coupon card
+    * */
+    card:function(callback){
+        $.ajax({
+            url:'/api/card',
+            type:'POST',
+            dataType:'json',
+            success:function(data){
+                return callback(data);
+            }
+        });
+    },
+    /*
+    * when paint the canvas end, submit the money
+    * */
+    saveTheMoney:function(callback){
+        $.ajax({
+            url:'/api/save',
+            type:'POST',
+            dataType:'json',
+            success:function(data){
+                return callback(data);
+            }
+        });
+    },
+    /*
+    * if shared,show 333
+    * */
+    isShare:function(callback){
+        $.ajax({
+            url:'/api/share',
+            type:'POST',
+            dataType:'json',
+            success:function(data){
+                return callback(data);
+            }
+        });
+    },
+
+
+
+};
 /*
 *20161111
 *Evelyn
@@ -280,145 +343,128 @@ $(document).ready(function(){
         this.isGetDouble = false;
         this.couponValue = 111;
     };
-    controller.prototype = {
-        init:function(){
-            var self = this;
-            //    api(isgetfirst)
-            if(self.isFollow){
-                gotoPin(1);
-                if(self.isGetFirst){
-                    //    show the get number
-                    self.updateCouponNumber(self.isGetDouble);
-                }else{
-                    self.initCanvas();
-                }
-            }else{
-                gotoPin(0);
-                if(self.isGetFirst){
-                    //    show the get number
-                    self.updateCouponNumber(self.isGetDouble);
-                }else{
-                    console.log('click next btn');
-                }
-            }
-
-            self.bindEvent();
-
-        },
-        //bind all element event,such as click, touchstart
-        bindEvent:function(){
-            var self = this;
-
-            //next button to paint page
-            $('.next').on('touchstart',function(){
-                gotoPin(1);
-                self.initCanvas();
-            });
-
-            $('.btn-getdouble').on('touchstart',function(){
-                self.initCanvas();
-            });
-
-        },
-
-        //getCurrentCopon
-        getCoupon:function(value){
-
-            console.log('领取'+value+'金额');
-        },
-
-        //set coupon number
-        updateCouponNumber:function(isdouble){
-            var self = this;
-            $('.prize').addClass('show');
-            if(isdouble){
-                self.couponValue = 333;
-            }else{
-                var initCoupon = [111,222];
-                var r = Math.round(Math.random());
-                self.couponValue = initCoupon[r];
-            }
-            //show the money in site
-            $('.prize .num').html(self.couponValue);
-        },
-
-        //paint the canvas and then show the money,such as 111,222,and then share success,show 333
-        paintCanvas:function(){
-
-            var id = $('#lottery');
-            console.log(id);
-
-        },
-        getTransparentPercent: function(ctx, width, height) {
-            var imgData = ctx.getImageData(0, 0, width, height),
-                pixles = imgData.data,
-                transPixs = [];
-            for (var i = 0, j = pixles.length; i < j; i += 4) {
-                var a = pixles[i + 3];
-                if (a < 128) {
-                    transPixs.push(i);
-                }
-            }
-            return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
-        },
-        initCanvas:function(){
-            var self=this;
-
-
-            var ratio = window.innerWidth/750;
-            var paintCanvas = document.getElementById('lottery');
-            paintCanvas.width = parseInt(450*ratio);
-            paintCanvas.height = parseInt(228*ratio);
-            var ctx = paintCanvas.getContext('2d');
-            var img = new Image();
-            img.src = '/dist/images/mask.jpg';
-            img.width = parseInt(450*ratio);
-            img.height = parseInt(228*ratio);
-            console.log(img);
-            img.onload = function(){
-                ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
+    controller.prototype.init = function(){
+        var self = this;
+        //    api(isgetfirst)
+        if(self.isFollow){
+            gotoPin(1);
+            if(self.isGetFirst){
+                //    show the get number
                 self.updateCouponNumber(self.isGetDouble);
-            };
+            }else{
+                self.initCanvas();
+            }
+        }else{
+            gotoPin(0);
+            if(self.isGetFirst){
+                //    show the get number
+                self.updateCouponNumber(self.isGetDouble);
+            }else{
+                console.log('click next btn');
+            }
+        }
+        self.bindEvent();
 
-            var offLeft  = $('#lotteryContainer').offset().left;
-            var offTop  = $('#lotteryContainer').offset().top;
+    };
+    //bind all element event,such as click, touchstart
+    controller.prototype.bindEvent=function(){
+        var self = this;
 
-            ctx.beginPath();
-            ctx.lineWidth = 30;
-            paintCanvas.addEventListener('touchstart',function(ev){
-                //console.log(ev);
-                ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
-            });
+        //next button to paint page
+        $('.next').on('touchstart',function(){
+            gotoPin(1);
+            self.initCanvas();
+        });
 
-            var times = 0,
-                enableRub = true;
-            paintCanvas.addEventListener('touchmove', function(ev) {
-                if(!enableRub) return;
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.strokeStyle = '#000';
-                ctx.lineTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY-offTop);
-                ctx.stroke();
-                var percent = self.getTransparentPercent(ctx,paintCanvas.width,paintCanvas.height);
-                //times++;
-                if(percent>80){
-                    ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
-                    $('.btn-collection .btn').removeClass('disabled');
-                    console.log('yes');
-                    enableRub = false;
-                }
-            });
-        },
+        $('.btn-getdouble').on('touchstart',function(){
+            self.initCanvas();
+        });
 
-        compareCommand:function(commandline){
-            /*
-             * If the input command is right, then upload the command to server.
-             * Show different message according input command.
-             * The commandline is input value
-             * */
-            var self = this;
-        },
+    };
+    controller.prototype.getCoupon=function(value){
+
+        console.log('领取'+value+'金额');
+    };
+    controller.prototype.updateCouponNumber=function(isdouble){
+        var self = this;
+        $('.prize').addClass('show');
+        if(isdouble){
+            self.couponValue = 333;
+        }else{
+            var initCoupon = [111,222];
+            var r = Math.round(Math.random());
+            self.couponValue = initCoupon[r];
+        }
+        //show the money in site
+        $('.prize .num').html(self.couponValue);
+    };
+
+    controller.prototype.paintCanvas=function(){
+
+        var id = $('#lottery');
+        console.log(id);
+
+    };
+
+    controller.prototype.getTransparentPercent=function(ctx, width, height) {
+        var imgData = ctx.getImageData(0, 0, width, height),
+            pixles = imgData.data,
+            transPixs = [];
+        for (var i = 0, j = pixles.length; i < j; i += 4) {
+            var a = pixles[i + 3];
+            if (a < 128) {
+                transPixs.push(i);
+            }
+        }
+        return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
+    };
+
+    controller.prototype.initCanvas=function(){
+        var self=this;
 
 
+        var ratio = window.innerWidth/750;
+        var paintCanvas = document.getElementById('lottery');
+        paintCanvas.width = parseInt(450*ratio);
+        paintCanvas.height = parseInt(228*ratio);
+        var ctx = paintCanvas.getContext('2d');
+        var img = new Image();
+        img.src = '/dist/images/mask.jpg';
+        img.width = parseInt(450*ratio);
+        img.height = parseInt(228*ratio);
+        console.log(img);
+        img.onload = function(){
+            ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
+            self.updateCouponNumber(self.isGetDouble);
+        };
+
+        var offLeft  = $('#lotteryContainer').offset().left;
+        var offTop  = $('#lotteryContainer').offset().top;
+
+        ctx.beginPath();
+        ctx.lineWidth = 30;
+        paintCanvas.addEventListener('touchstart',function(ev){
+            //console.log(ev);
+            ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
+        });
+
+        var times = 0,
+            enableRub = true;
+        paintCanvas.addEventListener('touchmove', function(ev) {
+            if(!enableRub) return;
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.strokeStyle = '#000';
+            ctx.lineTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY-offTop);
+            ctx.stroke();
+            var percent = self.getTransparentPercent(ctx,paintCanvas.width,paintCanvas.height);
+            //times++;
+            if(percent>80){
+                ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
+                $('.btn-collection .btn').removeClass('disabled');
+                console.log('yes');
+                enableRub = false;
+            }
+        });
     };
 
     if (typeof define === 'function' && define.amd){
@@ -438,6 +484,8 @@ $(document).ready(function(){
 
     var redpacket= new controller();
     redpacket.init();
+
+
 
 });
 

@@ -22,12 +22,12 @@ html,body{
 }
 
 //for pin1
-.pin{
-  display: none;
-  &.current{
-    display: block;
-  }
-}
+//.pin{
+//  display: none;
+//  &.current{
+//    display: block;
+//  }
+//}
 
 
 /*For content*/
@@ -143,11 +143,14 @@ html,body{
     margin: 0 auto 0.8rem;
   }
   .next{
-    color: #2c2b2b;
-    font-size: 0.3rem;
-    text-decoration: underline;
     width: 2rem;
     margin: 0 auto;
     text-align: center;
+    a{
+      display: block;
+      color: #2c2b2b;
+      font-size: 0.3rem;
+      text-decoration: underline;
+    }
   }
 }
