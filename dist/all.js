@@ -33,10 +33,6 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     if (!doc.addEventListener) return;
     win.addEventListener(resizeEvt, recalc, false);
 })(document, window);
-function gotoPin(i) {
-	var $pin = $('.wrapper .pin');
-	$pin.removeClass('current').eq(i).addClass('current');
-};
 ;(function(){
 	var ua = navigator.userAgent.toLowerCase();
 	var Common = {
@@ -295,11 +291,11 @@ Api = {
         });
     },
     /*
-    * when paint the canvas end, submit the money
+    * when start paint the canvas, sent the money from backend
     * */
     saveTheMoney:function(callback){
         $.ajax({
-            url:'/api/save',
+            url:'/api/savecard',
             type:'POST',
             dataType:'json',
             success:function(data){
@@ -345,34 +341,34 @@ Api = {
     };
     controller.prototype.init = function(){
         var self = this;
-        //    api(isgetfirst)
-        if(self.isFollow){
-            gotoPin(1);
-            if(self.isGetFirst){
-                //    show the get number
-                self.updateCouponNumber(self.isGetDouble);
+
+        Api.isLogin(function(data){
+            //has get money
+            if(data.status==1){
+                if(data.msg){
+                    self.updateCouponNumber(data.msg);
+                }else{
+                    //    data msg is null or 0
+                    self.initCanvas();
+                }
             }else{
-                self.initCanvas();
+            //   not login,go auth page
+                window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
+                console.log('未登录跳转到其他页面');
             }
-        }else{
-            gotoPin(0);
-            if(self.isGetFirst){
-                //    show the get number
-                self.updateCouponNumber(self.isGetDouble);
-            }else{
-                console.log('click next btn');
-            }
-        }
+        });
         self.bindEvent();
 
     };
-    //bind all element event,such as click, touchstart
+
+    /*==================================
+    * Events
+    * ==================================*/
     controller.prototype.bindEvent=function(){
         var self = this;
 
         //next button to paint page
         $('.next').on('touchstart',function(){
-            gotoPin(1);
             self.initCanvas();
         });
 
@@ -381,29 +377,11 @@ Api = {
         });
 
     };
-    controller.prototype.getCoupon=function(value){
-
-        console.log('领取'+value+'金额');
-    };
-    controller.prototype.updateCouponNumber=function(isdouble){
+    controller.prototype.updateCouponNumber=function(val){
         var self = this;
-        $('.prize').addClass('show');
-        if(isdouble){
-            self.couponValue = 333;
-        }else{
-            var initCoupon = [111,222];
-            var r = Math.round(Math.random());
-            self.couponValue = initCoupon[r];
-        }
         //show the money in site
-        $('.prize .num').html(self.couponValue);
-    };
-
-    controller.prototype.paintCanvas=function(){
-
-        var id = $('#lottery');
-        console.log(id);
-
+        $('.prize').addClass('show');
+        $('.prize .num').html(val);
     };
 
     controller.prototype.getTransparentPercent=function(ctx, width, height) {
@@ -419,37 +397,47 @@ Api = {
         return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
     };
 
+    /*==================================
+     * load canvas
+     * ==================================*/
     controller.prototype.initCanvas=function(){
         var self=this;
-
-
         var ratio = window.innerWidth/750;
+
         var paintCanvas = document.getElementById('lottery');
         paintCanvas.width = parseInt(450*ratio);
         paintCanvas.height = parseInt(228*ratio);
         var ctx = paintCanvas.getContext('2d');
+
         var img = new Image();
         img.src = '/dist/images/mask.jpg';
         img.width = parseInt(450*ratio);
         img.height = parseInt(228*ratio);
-        console.log(img);
         img.onload = function(){
             ctx.drawImage(img,0,0,paintCanvas.clientWidth,paintCanvas.clientHeight);
-            self.updateCouponNumber(self.isGetDouble);
         };
-
         var offLeft  = $('#lotteryContainer').offset().left;
         var offTop  = $('#lotteryContainer').offset().top;
 
         ctx.beginPath();
         ctx.lineWidth = 30;
+        //ask api just first time
+        var enableSave = true;
         paintCanvas.addEventListener('touchstart',function(ev){
-            //console.log(ev);
             ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
+            if(enableSave){
+                Api.saveTheMoney(function(data){
+                    console.log(data);
+                    if(data.status){
+                        self.updateCouponNumber(data.msg);
+                    }
+                });
+                enableSave = false;
+            }
+
         });
 
-        var times = 0,
-            enableRub = true;
+        var enableRub = true;
         paintCanvas.addEventListener('touchmove', function(ev) {
             if(!enableRub) return;
             ctx.globalCompositeOperation = 'destination-out';

@@ -32,11 +32,11 @@ Api = {
         });
     },
     /*
-    * when paint the canvas end, submit the money
+    * when start paint the canvas, sent the money from backend
     * */
     saveTheMoney:function(callback){
         $.ajax({
-            url:'/api/save',
+            url:'/api/savecard',
             type:'POST',
             dataType:'json',
             success:function(data){

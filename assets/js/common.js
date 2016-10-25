@@ -1,7 +1,3 @@
-function gotoPin(i) {
-	var $pin = $('.wrapper .pin');
-	$pin.removeClass('current').eq(i).addClass('current');
-};
 ;(function(){
 	var ua = navigator.userAgent.toLowerCase();
 	var Common = {
