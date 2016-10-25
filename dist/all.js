@@ -338,6 +338,9 @@ Api = {
         //is get the double coupon,333
         this.isGetDouble = false;
         this.couponValue = 111;
+
+
+        this.isGetCoupon = false;
     };
     controller.prototype.init = function(){
         var self = this;
@@ -347,6 +350,8 @@ Api = {
             if(data.status==1){
                 if(data.msg){
                     self.updateCouponNumber(data.msg);
+                    $('.btn-collection .btn').removeClass('disabled');
+                    self.isGetCoupon = true;
                 }else{
                     //    data msg is null or 0
                     self.initCanvas();
@@ -367,14 +372,65 @@ Api = {
     controller.prototype.bindEvent=function(){
         var self = this;
 
-        //next button to paint page
-        $('.next').on('touchstart',function(){
-            self.initCanvas();
+        /*====
+        * get the card
+        * 我要领取
+        * ===*/
+        var enableGet = true;
+        $('.btn-get').on('touchstart',function(){
+            if(!self.isGetCoupon) return;
+            if(!enableGet) return;
+            enableGet = false;
+            Api.card(function(data){
+                console.log(data);
+                enableGet = true;
+                var cardListJSON = data.msg;
+                var i=1;
+                wx.addCard({
+                    cardList: [{
+                        cardId: cardListJSON[i-1].cardId,
+                        cardExt: '{"timestamp":"'+cardListJSON[i-1].cardExt.timestamp+'","signature":"'+cardListJSON[i-1].cardExt.signature+'","openid":"'+cardListJSON[i-1].cardExt.openid+'","code":"'+cardListJSON[i-1].cardExt.code+'"}'
+                    }],
+                    success: function(res) {
+                        var cardList = res.cardList;
+                        //alert(JSON.stringfiy(res));
+                    },
+                    fail: function(res) {
+                        //alert(JSON.stringfiy(res));
+                    },
+                    complete: function(res) {
+                        //alert(JSON.stringfiy(res));
+                    },
+                    cancel: function(res) {
+                        //alert(JSON.stringfiy(res));
+                    },
+                    trigger: function(res) {
+                        //alert(JSON.stringfiy(res));
+                    }
+                });
+            });
         });
 
+        /*====
+         * share to get double
+         * 我要翻倍
+         * ===*/
+        //var enableDouble = true;
         $('.btn-getdouble').on('touchstart',function(){
-            self.initCanvas();
+            if(!self.isGetCoupon) return;
+            //if(!enableDouble) return;
+            //enableDouble = false;
+            $('.pop-share').addClass('show');
+            self.shareSuccess();
         });
+
+        /*====
+         * Hide the pop share overlay
+         * ===*/
+        $('.pop-share').on('touchstart',function(){
+            $('.pop-share').removeClass('show');
+        });
+
 
     };
     controller.prototype.updateCouponNumber=function(val){
@@ -445,13 +501,53 @@ Api = {
             ctx.lineTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY-offTop);
             ctx.stroke();
             var percent = self.getTransparentPercent(ctx,paintCanvas.width,paintCanvas.height);
-            //times++;
+
             if(percent>80){
                 ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
                 $('.btn-collection .btn').removeClass('disabled');
+                self.isGetCoupon = true;
                 console.log('yes');
                 enableRub = false;
             }
+        });
+    };
+
+    /*==================================
+     * Share success,double money
+     * ==================================*/
+    controller.prototype.shareSuccess=function(val){
+        var self = this;
+        Api.isShare(function(data){
+            console.log(data);
+        });
+        wx.ready(function(){
+            wx.onMenuShareAppMessage({
+                title: 'title',
+                desc: 'des',
+                link: 'link',
+                imgUrl: 'img',
+                type: '',
+                dataUrl: '',
+                success: function () {
+                    console.log('share success to friend');
+                    self.updateCouponNumber('333');
+                },
+                cancel: function () {
+
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: 'title1',
+                link: 'link',
+                imgUrl: 'img',
+                success: function () {
+                    console.log('share success to timeline');
+                    self.updateCouponNumber('333');
+                },
+                cancel: function () {
+
+                }
+            });
         });
     };
 
