@@ -358,8 +358,8 @@ Api = {
                 }
             }else{
             //   not login,go auth page
-                window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
-                console.log('未登录跳转到其他页面');
+            //    window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
+            //    console.log('未登录跳转到其他页面');
             }
         });
         self.bindEvent();
@@ -421,14 +421,17 @@ Api = {
             //if(!enableDouble) return;
             //enableDouble = false;
             $('.pop-share').addClass('show');
-            self.shareSuccess();
+
+            //self.shareSuccess();
+            /*for test*/
+            self.shareSuccessCallback();
         });
 
         /*====
          * Hide the pop share overlay
          * ===*/
         $('.pop-share').on('touchstart',function(){
-            $('.pop-share').removeClass('show');
+            self.hideSharePop();
         });
 
 
@@ -438,6 +441,13 @@ Api = {
         //show the money in site
         $('.prize').addClass('show');
         $('.prize .num').html(val);
+    };
+    /*==================================
+     * hide pop share
+     * ==================================*/
+    controller.prototype.hideSharePop=function(val){
+        var self = this;
+        $('.pop-share').removeClass('show');
     };
 
     controller.prototype.getTransparentPercent=function(ctx, width, height) {
@@ -515,11 +525,8 @@ Api = {
     /*==================================
      * Share success,double money
      * ==================================*/
-    controller.prototype.shareSuccess=function(val){
+    controller.prototype.shareSuccess=function(){
         var self = this;
-        Api.isShare(function(data){
-            console.log(data);
-        });
         wx.ready(function(){
             wx.onMenuShareAppMessage({
                 title: 'title',
@@ -529,8 +536,7 @@ Api = {
                 type: '',
                 dataUrl: '',
                 success: function () {
-                    console.log('share success to friend');
-                    self.updateCouponNumber('333');
+                    self.shareSuccessCallback();
                 },
                 cancel: function () {
 
@@ -541,13 +547,24 @@ Api = {
                 link: 'link',
                 imgUrl: 'img',
                 success: function () {
-                    console.log('share success to timeline');
-                    self.updateCouponNumber('333');
+                    self.shareSuccessCallback();
                 },
                 cancel: function () {
 
                 }
             });
+        });
+    };
+
+    /*==================================
+     * Share success callback,double money
+     * ==================================*/
+    controller.prototype.shareSuccessCallback=function(){
+        var self = this;
+        self.updateCouponNumber('333');
+        self.hideSharePop();
+        Api.isShare(function(data){
+            console.log(data);
         });
     };
 
