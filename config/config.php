@@ -4,7 +4,7 @@
 define("REDIS_HOST", '10.10.14.138');
 define("REDIS_PORT", '6379');
 
-define("BASE_URL", 'http://careerwomen.samesamechina.com/');
+define("BASE_URL", 'http://ownthisday.samesamechina.com/');
 define("TEMPLATE_ROOT", dirname(__FILE__) . '/../template');
 
 //当前时间

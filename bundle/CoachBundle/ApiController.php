@@ -61,6 +61,10 @@ class ApiController extends Controller {
 			return $this->statusPrint(0, '未登录');
 		}
 		$databaseapi = new \Lib\DatabaseAPI();
+		$rs = $databaseapi->getsharelog($user);
+		if ($rs) {
+			return $this->dataPrint(array("status"=>1, "msg" => '333'));
+		}
 		$rs = $databaseapi->getCardLog($user);
 		return $this->dataPrint(array("status"=>1, "msg" => $rs));
 	}
@@ -74,8 +78,8 @@ class ApiController extends Controller {
 		$number = rand(1,2);
 		$card = $number*111;
 		$databaseapi = new \Lib\DatabaseAPI();	
-		$databaseapi->saveCard($user, $card);
-		return $this->statusPrint(1, $card);
+		$rs = $databaseapi->saveCard($user, $card);
+		return $this->statusPrint(1, $rs);
 	}
 
 	public function shareAction() {

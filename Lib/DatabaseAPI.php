@@ -74,9 +74,9 @@ class DatabaseAPI extends Base {
 		$res = $this->db->prepare($sql); 
 		$res->bind_param("ss", $uid, $card);
 		if ($res->execute()) {
-			return TRUE;
+			return $card;
 		} else {
-			return FALSE;
+			return $this->getCardLog($uid);
 		}
 	}
 
@@ -89,6 +89,18 @@ class DatabaseAPI extends Base {
 		} else {
 			return FALSE;
 		}
+	}
+
+	public function getsharelog($uid) {
+		$sql = "SELECT `id` FROM `coach_share` WHERE `uid` = ?"; 
+		$res = $this->db->prepare($sql);
+		$res->bind_param("s", $uid);
+		$res->execute();
+		$res->bind_result($id);
+		if($res->fetch()) {	
+			return $id;
+		}
+		return 0;
 	}
 	
 
