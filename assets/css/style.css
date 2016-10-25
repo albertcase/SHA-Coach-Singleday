@@ -660,3 +660,13 @@ html, body {
   font-size: 0.3rem;
   text-decoration: underline;
 }
+
+.pop-share {
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 0, 0, 0.9);
+}
+.pop-share .tips {
+  width: 3.34rem;
+  height: 1.41rem;
+  float: right;
+}

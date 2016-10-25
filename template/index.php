@@ -9,7 +9,7 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="full-screen" content="yes">
     <link rel="stylesheet" type="text/css" href="/dist/css/style.css" />
-    <script src="http://coach.samesamechina.com/api/v1/js/76a133ba-8a21-4b5c-91d1-acaefdb47977/wechat"></script>
+    <script src="http://coach.samesamechina.com/api/v1/js/76a133ba-8a21-4b5c-91d1-acaefdb47977/wechat?debug=true"></script>
     <script type="text/javascript" src="/dist/js/all.min.js"></script>
 </head>
 <body class="page-home">
@@ -32,6 +32,11 @@
                 <div class="btn btn-get disabled">我要领取</div>
                 <div class="btn btn-getdouble disabled">我要翻倍</div>
             </div>
+        </div>
+    </div>
+    <div class="popup pop-share">
+        <div class="tips">
+            <img src="/dist/images/share-tips.png" alt=""/>
         </div>
     </div>
 </body>

@@ -154,3 +154,13 @@ html,body{
     }
   }
 }
+
+//for pop-share
+.pop-share{
+  padding: 0.2rem 0.5rem;
+  background: rgba(0,0,0,.9);
+  .tips{
+    @include size(3.34rem,1.41rem);
+    float: right;
+  }
+}
