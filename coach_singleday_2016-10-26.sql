@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.19-0ubuntu0.14.04.4)
 # Database: coach_singleday
-# Generation Time: 2016-10-25 08:26:25 +0000
+# Generation Time: 2016-10-26 10:05:44 +0000
 # ************************************************************
 
 
@@ -34,15 +34,6 @@ CREATE TABLE `coach_card` (
   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `coach_card` WRITE;
-/*!40000 ALTER TABLE `coach_card` DISABLE KEYS */;
-
-INSERT INTO `coach_card` (`id`, `uid`, `type`, `createtime`)
-VALUES
-	(1,1,222,'2016-10-25 04:10:43');
-
-/*!40000 ALTER TABLE `coach_card` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table coach_info
@@ -57,16 +48,6 @@ CREATE TABLE `coach_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `coach_info` WRITE;
-/*!40000 ALTER TABLE `coach_info` DISABLE KEYS */;
-
-INSERT INTO `coach_info` (`id`, `openid`, `createtime`)
-VALUES
-	(1,'oKCDxjifM1kEMt1BY5O9NbYtz3rQ','2016-10-25 03:13:52'),
-	(2,'123','2016-10-25 03:25:10');
-
-/*!40000 ALTER TABLE `coach_info` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table coach_share
@@ -81,15 +62,6 @@ CREATE TABLE `coach_share` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `coach_share` WRITE;
-/*!40000 ALTER TABLE `coach_share` DISABLE KEYS */;
-
-INSERT INTO `coach_share` (`id`, `uid`, `createtime`)
-VALUES
-	(1,1,'2016-10-25 04:07:17');
-
-/*!40000 ALTER TABLE `coach_share` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 
