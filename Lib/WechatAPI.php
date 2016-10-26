@@ -53,6 +53,18 @@ class WechatAPI {
             'code' => '',
             'openid' => ''
     );
+    $data[] = array(
+            'card_id' => 'pKCDxjjMu_A_OlyidjNNeQ2Hqdrk',
+      //'card_id' => 'pKCDxjmRzfE5XdnYkXaZS1iAaCHQ',
+            'code' => '',
+            'openid' => ''
+    );
+    $data[] = array(
+            'card_id' => 'pKCDxjjMu_A_OlyidjNNeQ2Hqdrk',
+      //'card_id' => 'pKCDxjmRzfE5XdnYkXaZS1iAaCHQ',
+            'code' => '',
+            'openid' => ''
+    );
      
     $ch = curl_init ();
     // print_r($ch);
