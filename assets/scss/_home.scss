@@ -48,10 +48,14 @@ html,body{
   .title{
     font-size: 0.31rem;
     font-weight: bold;
+    letter-spacing: 2px;
   }
   .line{
     width: 0.6rem;
     margin: 0.35rem auto;
+    background: #060606;
+    height: 1px;
+    border: none;
   }
   .t1{
     font-size: 0.64rem;

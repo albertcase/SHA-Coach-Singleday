@@ -358,8 +358,7 @@ Api = {
                 }
             }else{
             //   not login,go auth page
-            //    window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
-            //    console.log('未登录跳转到其他页面');
+                window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
             }
         });
         self.bindEvent();
