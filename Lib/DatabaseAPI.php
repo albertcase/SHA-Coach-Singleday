@@ -41,18 +41,15 @@ class DatabaseAPI extends Base {
 		if (isset($_COOKIE['user_id'])) {
 			return $_COOKIE['user_id'];
 		}
-		$sql = "SELECT `id`, `openid` FROM `coach_info` WHERE `openid` = ?"; 
+		$sql = "SELECT `id` FROM `coach_info` WHERE `openid` = ?"; 
 		$res = $this->db->prepare($sql);
 		$res->bind_param("s", $openid);
 		$res->execute();
-		$res->bind_result($uid, $openid);
-		if($res->fetch()) {
-			$user = new \stdClass();
-			$user->uid = $uid;
-			$user->openid = $openid;		
+		$res->bind_result($uid);
+		if($res->fetch()) {		
 			setcookie('user_id', $uid, time()+3600*24*365);
 			$_COOKIE['user_id'] = $uid;
-			return $user;
+			return $uid;
 		}
 		return NULL;
 	}
