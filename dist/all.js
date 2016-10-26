@@ -377,10 +377,9 @@ Api = {
         * ===*/
         var enableGet = true;
         $('.btn-get').on('touchstart',function(){
-            if(!self.isGetCoupon || !enableGet) return;
+            if(!(self.isGetCoupon && enableGet)) return;
             enableGet = false;
             Api.card(function(data){
-                console.log(data);
                 enableGet = true;
                 var cardListJSON = data.msg;
                 var i=1;
