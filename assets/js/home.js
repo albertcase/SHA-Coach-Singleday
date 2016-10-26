@@ -6,18 +6,6 @@
 ;(function(){
     'use strict';
     var controller = function(){
-        //if user is logged
-        this.isLogged = false;
-
-        //if user follow coach weixin public account
-        this.isFollow = true;
-        //is get the first coupon,111 or 222
-        this.isGetFirst = false;
-        //is get the double coupon,333
-        this.isGetDouble = false;
-        this.couponValue = 111;
-
-
         this.isGetCoupon = false;
     };
     controller.prototype.init = function(){
@@ -36,8 +24,7 @@
                 }
             }else{
             //   not login,go auth page
-            //    window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
-            //    console.log('未登录跳转到其他页面');
+                window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
             }
         });
         self.bindEvent();
@@ -56,8 +43,7 @@
         * ===*/
         var enableGet = true;
         $('.btn-get').on('touchstart',function(){
-            if(!self.isGetCoupon) return;
-            if(!enableGet) return;
+            if(!self.isGetCoupon || !enableGet) return;
             enableGet = false;
             Api.card(function(data){
                 console.log(data);
@@ -100,9 +86,9 @@
             //enableDouble = false;
             $('.pop-share').addClass('show');
 
-            //self.shareSuccess();
+            self.shareSuccess();
             /*for test*/
-            self.shareSuccessCallback();
+            //self.shareSuccessCallback();
         });
 
         /*====
