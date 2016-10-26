@@ -8,11 +8,13 @@ Api = {
     * logged,status is 0 or 1,and then show different msg,'111','222','333'
     * */
     isLogin:function(callback){
+        Common.msgBox.add('loading...');
         $.ajax({
             url:'/api/islogin',
             type:'POST',
             dataType:'json',
             success:function(data){
+                Common.msgBox.remove();
                 return callback(data);
             }
         });
@@ -22,11 +24,13 @@ Api = {
     * get the coupon card
     * */
     card:function(callback){
+        Common.msgBox.add('loading...');
         $.ajax({
             url:'/api/card',
             type:'POST',
             dataType:'json',
             success:function(data){
+                Common.msgBox.remove();
                 return callback(data);
             }
         });
@@ -48,11 +52,13 @@ Api = {
     * if shared,show 333
     * */
     isShare:function(callback){
+        Common.msgBox.add('loading...');
         $.ajax({
             url:'/api/share',
             type:'POST',
             dataType:'json',
             success:function(data){
+                Common.msgBox.remove();
                 return callback(data);
             }
         });

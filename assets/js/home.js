@@ -6,18 +6,6 @@
 ;(function(){
     'use strict';
     var controller = function(){
-        //if user is logged
-        this.isLogged = false;
-
-        //if user follow coach weixin public account
-        this.isFollow = true;
-        //is get the first coupon,111 or 222
-        this.isGetFirst = false;
-        //is get the double coupon,333
-        this.isGetDouble = false;
-        this.couponValue = 111;
-
-
         this.isGetCoupon = false;
     };
     controller.prototype.init = function(){
@@ -56,8 +44,7 @@
         * ===*/
         var enableGet = true;
         $('.btn-get').on('touchstart',function(){
-            if(!self.isGetCoupon) return;
-            if(!enableGet) return;
+            if(!self.isGetCoupon || !enableGet) return;
             enableGet = false;
             Api.card(function(data){
                 console.log(data);
@@ -100,9 +87,9 @@
             //enableDouble = false;
             $('.pop-share').addClass('show');
 
-            //self.shareSuccess();
+            self.shareSuccess();
             /*for test*/
-            self.shareSuccessCallback();
+            //self.shareSuccessCallback();
         });
 
         /*====

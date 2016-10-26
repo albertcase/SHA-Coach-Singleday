@@ -37,11 +37,16 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 ;(function(){
 	var ua = navigator.userAgent.toLowerCase();
 	var Common = {
-		msgBox:function(msg,long){
-			if(long){
-				$('body').append('<div class="ajaxpop msgbox minwidthbox"><div class="loading">'+msg+'</div></div>');
-			}else{
-				$('body').append('<div class="ajaxpop msgbox"><div class="loading"><div class="icon-loading"></div>'+msg+'</div></div>');
+		msgBox:{
+			add:function(msg,long){
+				if(long){
+					$('body').append('<div class="ajaxpop msgbox minwidthbox"><div class="loading">'+msg+'</div></div>');
+				}else{
+					$('body').append('<div class="ajaxpop msgbox"><div class="loading"><div class="icon-loading"></div>'+msg+'</div></div>');
+				}
+			},
+			remove:function(){
+				$('.ajaxpop').remove();
 			}
 		},
 		errorMsg : {
@@ -268,11 +273,13 @@ Api = {
     * logged,status is 0 or 1,and then show different msg,'111','222','333'
     * */
     isLogin:function(callback){
+        Common.msgBox.add('loading...');
         $.ajax({
             url:'/api/islogin',
             type:'POST',
             dataType:'json',
             success:function(data){
+                Common.msgBox.remove();
                 return callback(data);
             }
         });
@@ -282,11 +289,13 @@ Api = {
     * get the coupon card
     * */
     card:function(callback){
+        Common.msgBox.add('loading...');
         $.ajax({
             url:'/api/card',
             type:'POST',
             dataType:'json',
             success:function(data){
+                Common.msgBox.remove();
                 return callback(data);
             }
         });
@@ -308,11 +317,13 @@ Api = {
     * if shared,show 333
     * */
     isShare:function(callback){
+        Common.msgBox.add('loading...');
         $.ajax({
             url:'/api/share',
             type:'POST',
             dataType:'json',
             success:function(data){
+                Common.msgBox.remove();
                 return callback(data);
             }
         });
@@ -329,18 +340,6 @@ Api = {
 ;(function(){
     'use strict';
     var controller = function(){
-        //if user is logged
-        this.isLogged = false;
-
-        //if user follow coach weixin public account
-        this.isFollow = true;
-        //is get the first coupon,111 or 222
-        this.isGetFirst = false;
-        //is get the double coupon,333
-        this.isGetDouble = false;
-        this.couponValue = 111;
-
-
         this.isGetCoupon = false;
     };
     controller.prototype.init = function(){
@@ -379,8 +378,7 @@ Api = {
         * ===*/
         var enableGet = true;
         $('.btn-get').on('touchstart',function(){
-            if(!self.isGetCoupon) return;
-            if(!enableGet) return;
+            if(!self.isGetCoupon || !enableGet) return;
             enableGet = false;
             Api.card(function(data){
                 console.log(data);
@@ -423,9 +421,9 @@ Api = {
             //enableDouble = false;
             $('.pop-share').addClass('show');
 
-            //self.shareSuccess();
+            self.shareSuccess();
             /*for test*/
-            self.shareSuccessCallback();
+            //self.shareSuccessCallback();
         });
 
         /*====
