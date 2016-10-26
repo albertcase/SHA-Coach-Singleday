@@ -193,8 +193,8 @@
         var self = this;
         wx.ready(function(){
             wx.onMenuShareAppMessage({
-                title: 'title',
-                desc: 'des',
+                title: 'COACH双十一献礼',
+                desc: 'COACH双十一献礼',
                 link: 'http://ownthisday.samesamechina.com',
                 imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
                 type: '',
@@ -207,7 +207,7 @@
                 }
             });
             wx.onMenuShareTimeline({
-                title: 'title1',
+                title: 'COACH双十一献礼',
                 link: 'http://ownthisday.samesamechina.com/',
                 imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
                 success: function () {
