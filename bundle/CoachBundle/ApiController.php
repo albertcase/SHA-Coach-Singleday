@@ -60,6 +60,9 @@ class ApiController extends Controller {
 		if (!$user) {
 			return $this->statusPrint(0, '未登录');
 		}
+		if (isset($_COOKIE['user_card'])) {
+			return $this->statusPrint(1, $_COOKIE['user_card']);
+		}
 		$databaseapi = new \Lib\DatabaseAPI();
 		$rs = $databaseapi->getsharelog($user);
 		if ($rs) {
@@ -70,6 +73,9 @@ class ApiController extends Controller {
 	}
 
 	public function savecardAction() {
+		if (isset($_COOKIE['user_card'])) {
+			return $this->statusPrint(1, $_COOKIE['user_card']);
+		}
 		$UserAPI = new \Lib\UserAPI();
 		$user = $UserAPI->userLoad(true);
 		if (!$user) {
@@ -79,6 +85,8 @@ class ApiController extends Controller {
 		$card = $number*111;
 		$databaseapi = new \Lib\DatabaseAPI();	
 		$rs = $databaseapi->saveCard($user, $card);
+		setcookie('user_card', $rs, time()+3600*24*365);
+		$_COOKIE['user_card'] = $rs;
 		return $this->statusPrint(1, $rs);
 	}
 
@@ -90,6 +98,8 @@ class ApiController extends Controller {
 		}
 		$databaseapi = new \Lib\DatabaseAPI();
 		$databaseapi->shareLog($user);
+		setcookie('user_card', 333, time()+3600*24*365);
+		$_COOKIE['user_card'] = 333;
 		return $this->statusPrint(1, '分享成功');
 	}
 

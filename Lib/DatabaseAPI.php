@@ -38,17 +38,19 @@ class DatabaseAPI extends Base {
 	}
 
 	public function findUserByOpenid($openid) {
-		if (isset($_COOKIE['user_id'])) {
+		if (isset($_COOKIE['user_id'])&&isset($_COOKIE['user_openid'])) {
 			return $_COOKIE['user_id'];
 		}
-		$sql = "SELECT `id` FROM `coach_info` WHERE `openid` = ?"; 
+		$sql = "SELECT `id`,`openid` FROM `coach_info` WHERE `openid` = ?"; 
 		$res = $this->db->prepare($sql);
 		$res->bind_param("s", $openid);
 		$res->execute();
-		$res->bind_result($uid);
+		$res->bind_result($uid, $openid);
 		if($res->fetch()) {		
 			setcookie('user_id', $uid, time()+3600*24*365);
+			setcookie('user_openid', $openid, time()+3600*24*365);
 			$_COOKIE['user_id'] = $uid;
+			$_COOKIE['user_openid'] = $openid;
 			return $uid;
 		}
 		return NULL;

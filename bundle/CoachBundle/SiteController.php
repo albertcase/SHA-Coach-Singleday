@@ -21,7 +21,7 @@ class SiteController extends Controller {
 			$WechatAPI->wechatAuthorize();
 		}
 		$wechatapi = new \Lib\WechatAPI();
-		$rs = $wechatapi->isSubscribed($user); 
+		$rs = $wechatapi->isSubscribed($_COOKIE['user_openid']); 
 		if ($rs) {
 			$this->redirect('/member');
 			exit;
