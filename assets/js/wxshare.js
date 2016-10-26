@@ -33,10 +33,10 @@ $(document).ready(function(){
     }
 
     weixinshare({
-        title1: '为梦想，你包容了什么？',
-        des: '参与心理测试赢取由COACH追梦女性倾情赞助的礼物',
-        link: window.location.origin+'/index.html',
-        img: 'http://careerwomen.samesamechina.com/dist/images/share.jpg'
+        title1: 'COACH双十一献礼',
+        des: 'COACH双十一献礼',
+        link: 'http://ownthisday.samesamechina.com',
+        img: 'http://ownthisday.samesamechina.com/dist/images/logo.png'
     })
 
 });
