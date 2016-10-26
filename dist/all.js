@@ -382,6 +382,7 @@ Api = {
 ;(function(){
     'use strict';
     var controller = function(){
+        this.moneyVal = 111;
         this.isGetCoupon = false;
     };
     controller.prototype.init = function(){
@@ -425,6 +426,14 @@ Api = {
                 enableGet = true;
                 var cardListJSON = data.msg;
                 var i=1;
+
+                if(self.moneyVal==222){
+                    i=2;
+                }else if(self.moneyVal==333){
+                    i=3;
+                }else{
+                    i=1;
+                }
                 wx.addCard({
                     cardList: [{
                         cardId: cardListJSON[i-1].cardId,
@@ -478,6 +487,7 @@ Api = {
     controller.prototype.updateCouponNumber=function(val){
         var self = this;
         //show the money in site
+        self.moneyVal = val;
         $('.prize').addClass('show');
         $('.prize .num').html(val);
     };
@@ -533,7 +543,6 @@ Api = {
             ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
             if(enableSave){
                 Api.saveTheMoney(function(data){
-                    console.log(data);
                     if(data.status){
                         self.updateCouponNumber(data.msg);
                     }
