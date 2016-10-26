@@ -24,7 +24,7 @@
                 <img src="/dist/images/qrcode.jpg" alt=""/>
             </div>
             <div class="next">
-                <a href="index.php">下一步</a>
+                <a href="/member">下一步</a>
             </div>
         </div>
 
