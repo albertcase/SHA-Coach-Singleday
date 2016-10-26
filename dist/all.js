@@ -529,8 +529,8 @@ Api = {
             wx.onMenuShareAppMessage({
                 title: 'title',
                 desc: 'des',
-                link: 'link',
-                imgUrl: 'img',
+                link: 'http://ownthisday.samesamechina.com',
+                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
                 type: '',
                 dataUrl: '',
                 success: function () {
@@ -542,8 +542,8 @@ Api = {
             });
             wx.onMenuShareTimeline({
                 title: 'title1',
-                link: 'link',
-                imgUrl: 'img',
+                link: 'http://ownthisday.samesamechina.com/',
+                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
                 success: function () {
                     self.shareSuccessCallback();
                 },
