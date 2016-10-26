@@ -50,7 +50,7 @@ class DatabaseAPI extends Base {
 			$user = new \stdClass();
 			$user->uid = $uid;
 			$user->openid = $openid;		
-			setcookie('user_id', $uid);
+			setcookie('user_id', $uid, time()+3600*24*365);
 			$_COOKIE['user_id'] = $uid;
 			return $user;
 		}
