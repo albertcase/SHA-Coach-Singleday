@@ -2,6 +2,7 @@
 
 $routers = array();
 $routers['/'] = array('CoachBundle\Site', 'index');
+$routers['/member'] = array('CoachBundle\Site', 'member');
 $routers['/scan'] = array('CoachBundle\Api', 'qrcode');
 $routers['/getdata'] = array('CoachBundle\Api', 'getdata');
 $routers['/callback'] = array('CoachBundle\Api', 'callback');
