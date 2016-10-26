@@ -38,8 +38,8 @@ class DatabaseAPI extends Base {
 	}
 
 	public function findUserByOpenid($openid) {
-		if (isset($_COOKIE['user'])) {
-			return $_COOKIE['user'];
+		if (isset($_COOKIE['user_id'])) {
+			return $_COOKIE['user_id'];
 		}
 		$sql = "SELECT `id`, `openid` FROM `coach_info` WHERE `openid` = ?"; 
 		$res = $this->db->prepare($sql);
