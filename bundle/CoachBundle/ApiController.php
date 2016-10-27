@@ -85,7 +85,7 @@ class ApiController extends Controller {
 		$card = $number*111;
 		$databaseapi = new \Lib\DatabaseAPI();	
 		$rs = $databaseapi->saveCard($user, $card);
-		setcookie('user_card', $rs, time()+3600*24*365);
+		setcookie('user_card', $rs, time()+3600*24*365, '/');
 		$_COOKIE['user_card'] = $rs;
 		return $this->statusPrint(1, $rs);
 	}
@@ -98,7 +98,7 @@ class ApiController extends Controller {
 		}
 		$databaseapi = new \Lib\DatabaseAPI();
 		$databaseapi->shareLog($user);
-		setcookie('user_card', 333, time()+3600*24*365);
+		setcookie('user_card', 333, time()+3600*24*365, '/');
 		$_COOKIE['user_card'] = 333;
 		return $this->statusPrint(1, '分享成功');
 	}
