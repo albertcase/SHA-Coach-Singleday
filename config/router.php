@@ -12,3 +12,4 @@ $routers['/api/savecard'] = array('CoachBundle\Api', 'savecard');
 $routers['/api/share'] = array('CoachBundle\Api', 'share');
 $routers['/api/card'] = array('CoachBundle\Api', 'card');
 $routers['/oauth'] = array('CoachBundle\Api', 'oauth');
+$routers['/cookie'] = array('CoachBundle\Site', 'cookie');
