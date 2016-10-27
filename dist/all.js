@@ -616,10 +616,9 @@ Api = {
      * ==================================*/
     controller.prototype.shareSuccessCallback=function(){
         var self = this;
-        self.updateCouponNumber('333');
         self.hideSharePop();
         Api.isShare(function(data){
-            console.log(data);
+            self.updateCouponNumber('333');
         });
     };
 
