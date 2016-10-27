@@ -18,7 +18,7 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-    <script src="http://coach.samesamechina.com/api/v1/js/76a133ba-8a21-4b5c-91d1-acaefdb47977/wechat?debug=true"></script>
+    <script src="http://coach.samesamechina.com/api/v1/js/76a133ba-8a21-4b5c-91d1-acaefdb47977/wechat"></script>
     <script type="text/javascript" src="/dist/js/all.min.js"></script>
 </head>
 <body class="page-home">
