@@ -551,6 +551,7 @@ Api = {
         var baseurl = ''+'/dist/images/';
         var imagesArray = [
             baseurl + 'bg.jpg',
+            baseurl + 'coupon.png',
             baseurl + 'btns.png',
             baseurl + 'cbg.png',
             baseurl + 'logo.png',
@@ -681,7 +682,7 @@ Api = {
         //show the money in site
         self.moneyVal = val;
         $('.prize').addClass('show');
-        $('.prize .num').html(val);
+        $('.prize .num').addClass('coupon-'+val);
     };
     /*==================================
      * hide pop share

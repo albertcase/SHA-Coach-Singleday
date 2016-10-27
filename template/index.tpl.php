@@ -32,7 +32,7 @@
 
                 <div id="lotteryContainer">
                     <canvas id="lottery"></canvas>
-                    <div class="prize"><span class="num"></span>元抵用劵</div>
+                    <div class="prize"><span class="num"></span></div>
                 </div>
             </div>
             <div class="btn-collection">

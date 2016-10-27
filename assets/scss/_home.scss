@@ -100,10 +100,28 @@ html,body{
       opacity: 1;
     }
     .num{
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%,-50%));
+      @include size(4rem,0.6rem);
+      background: url("../images/coupon.png") no-repeat;
+      background-size: 100%;
       font-size: 0.6rem;
       font-weight: normal;
       font-style: italic;
       letter-spacing: 10px;
+      &.coupon-111{
+        background-position: 0 0;
+      }
+      &.coupon-222{
+        background-position: 0 50%;
+      }
+      &.coupon-333{
+        background-position: 0% 100%;
+
+      }
     }
   }
 }

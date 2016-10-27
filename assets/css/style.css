@@ -607,10 +607,31 @@ html, body {
   opacity: 1;
 }
 #lotteryContainer .prize .num {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  height: 0.6rem;
+  background: url("../images/coupon.png") no-repeat;
+  background-size: 100%;
   font-size: 0.6rem;
   font-weight: normal;
   font-style: italic;
   letter-spacing: 10px;
+}
+#lotteryContainer .prize .num.coupon-111 {
+  background-position: 0 0;
+}
+#lotteryContainer .prize .num.coupon-222 {
+  background-position: 0 50%;
+}
+#lotteryContainer .prize .num.coupon-333 {
+  background-position: 0% 100%;
 }
 
 .btn {
