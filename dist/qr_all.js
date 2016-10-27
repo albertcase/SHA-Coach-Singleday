@@ -69,10 +69,10 @@ $(document).ready(function(){
     }
 
     weixinshare({
-        title1: 'COACH双十一献礼',
-        des: 'COACH双十一献礼',
+        title1: 'COACH双十一电子礼券',
+        des: '电子礼券请收好，刮开还有机会把金额翻倍！尽情今日！',
         link: 'http://ownthisday.samesamechina.com',
-        img: 'http://ownthisday.samesamechina.com/dist/images/logo.png'
+        img: 'http://ownthisday.samesamechina.com/dist/images/share.jpg'
     })
 
 });

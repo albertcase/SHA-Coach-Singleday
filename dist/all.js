@@ -298,10 +298,10 @@ $(document).ready(function(){
     }
 
     weixinshare({
-        title1: 'COACH双十一献礼',
-        des: 'COACH双十一献礼',
+        title1: 'COACH双十一电子礼券',
+        des: '电子礼券请收好，刮开还有机会把金额翻倍！尽情今日！',
         link: 'http://ownthisday.samesamechina.com',
-        img: 'http://ownthisday.samesamechina.com/dist/images/logo.png'
+        img: 'http://ownthisday.samesamechina.com/dist/images/share.jpg'
     })
 
 });
@@ -594,10 +594,10 @@ Api = {
         var self = this;
         wx.ready(function(){
             wx.onMenuShareAppMessage({
-                title: 'COACH双十一献礼',
-                desc: 'COACH双十一献礼',
+                title: 'COACH双十一电子礼券',
+                desc: '电子礼券请收好，刮开还有机会把金额翻倍！尽情今日！',
                 link: 'http://ownthisday.samesamechina.com',
-                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
+                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/share.jpg',
                 type: '',
                 dataUrl: '',
                 success: function () {
@@ -609,9 +609,9 @@ Api = {
                 }
             });
             wx.onMenuShareTimeline({
-                title: 'COACH双十一献礼',
+                title: 'COACH双十一电子礼券',
                 link: 'http://ownthisday.samesamechina.com/',
-                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
+                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/share.jpg',
                 success: function () {
                     _hmt.push(['_trackEvent', 'buttons', 'click', 'DoubleShareTimeline']);
                     self.shareSuccessCallback();
