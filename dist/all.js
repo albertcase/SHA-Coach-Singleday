@@ -581,6 +581,7 @@ Api = {
                                 self.isGetDouble = true;
                                 $('.btn-collection .btn-getdouble').removeClass('disabled');
                             }
+                            self.shareSuccess();
 
                         }else{
                             //    data msg is null or 0
@@ -617,7 +618,6 @@ Api = {
                 enableGet = true;
                 var cardListJSON = data.msg;
                 var i=1;
-
                 if(self.moneyVal==222){
                     i=2;
                 }else if(self.moneyVal==333){
@@ -760,8 +760,8 @@ Api = {
                 $('.btn-collection .btn').removeClass('disabled');
                 self.isGetCoupon = true;
                 self.isGetDouble = true;
-                console.log('yes');
                 enableRub = false;
+                self.shareSuccess();
             }
         });
     };
