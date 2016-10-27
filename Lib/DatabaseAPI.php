@@ -47,8 +47,8 @@ class DatabaseAPI extends Base {
 		$res->execute();
 		$res->bind_result($uid, $openid);
 		if($res->fetch()) {		
-			setcookie('user_id', $uid, time()+3600*24*365, '/');
-			setcookie('user_openid', $openid, time()+3600*24*365, '/');
+			setcookie('user_id', $uid, time()+3600*24*365);
+			setcookie('user_openid', $openid, time()+3600*24*365);
 			$_COOKIE['user_id'] = $uid;
 			$_COOKIE['user_openid'] = $openid;
 			return $uid;
