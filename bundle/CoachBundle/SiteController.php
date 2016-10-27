@@ -48,4 +48,12 @@ class SiteController extends Controller {
 		exit;
 	}
 
+	public function cookieAction() {
+		unset($_COOKIE['user_id']);
+		unset($_COOKIE['user_openid']);
+		unset($_COOKIE['user_card']);
+		echo 'cookie unset';
+		exit;
+	}
+
 }
