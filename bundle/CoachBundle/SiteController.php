@@ -49,11 +49,11 @@ class SiteController extends Controller {
 	}
 
 	public function cookieAction() {
-		setcookie('user_id', '');
+		setcookie('user_id', '', time()-100);
 		unset($_COOKIE['user_id']);
-		setcookie('user_openid', '');
+		setcookie('user_openid', '', time()-100);
 		unset($_COOKIE['user_openid']);
-		setcookie('user_card', '');
+		setcookie('user_card', '', time()-100);
 		unset($_COOKIE['user_card']);
 		echo 'cookie unset';
 		exit;
