@@ -383,7 +383,10 @@ Api = {
     'use strict';
     var controller = function(){
         this.moneyVal = 111;
+        /*我要翻倍按钮*/
         this.isGetCoupon = false;
+        /*我要领取按钮*/
+        this.isGetDouble = false;
     };
     controller.prototype.init = function(){
         var self = this;
@@ -393,8 +396,16 @@ Api = {
             if(data.status==1){
                 if(data.msg){
                     self.updateCouponNumber(data.msg);
-                    $('.btn-collection .btn').removeClass('disabled');
-                    self.isGetCoupon = true;
+                    $('.btn-collection .btn-get').removeClass('disabled');
+                    self.isGetCoupon=true;
+                    if(data.msg==333){
+                        self.isGetDouble = false;
+                        $('.btn-collection .btn-getdouble').addClass('disabled');
+                    }else{
+                        self.isGetDouble = true;
+                        $('.btn-collection .btn-getdouble').removeClass('disabled');
+                    }
+
                 }else{
                     //    data msg is null or 0
                     self.initCanvas();
@@ -467,7 +478,7 @@ Api = {
         //var enableDouble = true;
         $('.btn-getdouble').on('touchstart',function(){
             _hmt.push(['_trackEvent', 'buttons', 'click', 'BtnGetDoubleCoupon']);
-            if(!self.isGetCoupon) return;
+            if(!self.isGetDouble) return;
             //if(!enableDouble) return;
             //enableDouble = false;
             $('.pop-share').addClass('show');
@@ -569,6 +580,7 @@ Api = {
                 ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
                 $('.btn-collection .btn').removeClass('disabled');
                 self.isGetCoupon = true;
+                self.isGetDouble = true;
                 console.log('yes');
                 enableRub = false;
             }
@@ -619,6 +631,8 @@ Api = {
         self.hideSharePop();
         Api.isShare(function(data){
             self.updateCouponNumber('333');
+            self.isGetDouble = false;
+            $('.btn-collection .btn-getdouble').addClass('disabled');
         });
     };
 
