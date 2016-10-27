@@ -16,7 +16,7 @@ var path = {
     all:['./*.html','./assets/css/*.css','./assets/js/*.js'    ,'./assets/js/lib/*.js'],
     template:['./template/*.html'],
     css:['./assets/css/*.css'],
-    js:['./assets/js/lib/zepto.min.js','./assets/js/rem.js','./assets/js/common.js','./assets/js/wxshare.js','./assets/js/api.js','./assets/js/home.js'],
+    js:['./assets/js/lib/zepto.min.js','./assets/js/lib/pre-loader.js','./assets/js/rem.js','./assets/js/common.js','./assets/js/wxshare.js','./assets/js/api.js','./assets/js/home.js'],
     qrjs:['./assets/js/lib/zepto.min.js','./assets/js/rem.js','./assets/js/wxshare.js','./assets/js/qr.js'],
     images:['./assets/images/*'],
     staticFolder:['./assets/images/*','./assets/font/*','./assets/video/*']

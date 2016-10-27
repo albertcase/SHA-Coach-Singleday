@@ -15,31 +15,52 @@
     controller.prototype.init = function(){
         var self = this;
 
-        Api.isLogin(function(data){
-            //has get money
-            if(data.status==1){
-                if(data.msg){
-                    self.updateCouponNumber(data.msg);
-                    $('.btn-collection .btn-get').removeClass('disabled');
-                    self.isGetCoupon=true;
-                    if(data.msg==333){
-                        self.isGetDouble = false;
-                        $('.btn-collection .btn-getdouble').addClass('disabled');
-                    }else{
-                        self.isGetDouble = true;
-                        $('.btn-collection .btn-getdouble').removeClass('disabled');
-                    }
+        var baseurl = ''+'/dist/images/';
+        var imagesArray = [
+            baseurl + 'bg.jpg',
+            baseurl + 'btns.png',
+            baseurl + 'cbg.png',
+            baseurl + 'logo.png',
+            baseurl + 'mask.jpg',
+            baseurl + 'prize-bg.png',
+            baseurl + 'qrcode.jpg',
+            baseurl + 'share-tips.png',
+            baseurl + 'share.jpg',
+        ];
+        var i = 0;
+        new preLoader(imagesArray, {
+            onProgress: function(){
+                Common.msgBox.add('loading...');
+            },
+            onComplete: function(){
+                Api.isLogin(function(data){
+                    //has get money
+                    if(data.status==1){
+                        if(data.msg){
+                            self.updateCouponNumber(data.msg);
+                            $('.btn-collection .btn-get').removeClass('disabled');
+                            self.isGetCoupon=true;
+                            if(data.msg==333){
+                                self.isGetDouble = false;
+                                $('.btn-collection .btn-getdouble').addClass('disabled');
+                            }else{
+                                self.isGetDouble = true;
+                                $('.btn-collection .btn-getdouble').removeClass('disabled');
+                            }
 
-                }else{
-                    //    data msg is null or 0
-                    self.initCanvas();
-                }
-            }else{
-            //   not login,go auth page
-                window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
+                        }else{
+                            //    data msg is null or 0
+                            self.initCanvas();
+                        }
+                    }else{
+                        //   not login,go auth page
+                        window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
+                    }
+                });
+                self.bindEvent();
             }
         });
-        self.bindEvent();
+
 
     };
 

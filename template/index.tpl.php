@@ -29,17 +29,15 @@
         <!-- 刮奖页面-->
         <div class="pin pin2">
             <div class="content">
-                <h2 class="title"> <span>11.11</span>现金优享抵用券</h2>
-                <hr class="line"/>
-                <div class="t1">刮开有礼</div>
+
                 <div id="lotteryContainer">
                     <canvas id="lottery"></canvas>
                     <div class="prize"><span class="num"></span>元抵用劵</div>
                 </div>
             </div>
             <div class="btn-collection">
-                <div class="btn btn-get disabled">我要领取</div>
-                <div class="btn btn-getdouble disabled">我要翻倍</div>
+                <div class="btn btn-get disabled"><span class="btn-t1">我要领取</span></div>
+                <div class="btn btn-getdouble disabled"><span class="btn-t2">我要翻倍</span></div>
             </div>
         </div>
     </div>

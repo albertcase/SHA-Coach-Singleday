@@ -28,8 +28,7 @@
         </div>
         <!-- qrcode-->
         <div class="pin pin1 current">
-            <p class="p1-title">长按二维码<br>
-                关注Coach官方账号</p>
+            <p class="p1-title">关注Coach官方账号</p>
             <div class="qrcode">
                 <img src="/dist/images/qrcode.jpg" alt=""/>
             </div>
