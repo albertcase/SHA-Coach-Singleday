@@ -65,9 +65,15 @@ html,body{
 }
 
 //for lottery
-#lotteryContainer{
+.content{
   position: relative;
+}
+#lotteryContainer{
+  position: absolute;
   @include size(4.5rem,2.28rem);
+  bottom: 0.8rem;
+  left: 50%;
+  @include transform(translate(-50%,0%));
   margin: 0 auto;
   #lottery{
     position: absolute;
@@ -94,10 +100,28 @@ html,body{
       opacity: 1;
     }
     .num{
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%,-50%));
+      @include size(4rem,0.6rem);
+      background: url("../images/coupon.png") no-repeat;
+      background-size: 100%;
       font-size: 0.6rem;
       font-weight: normal;
       font-style: italic;
       letter-spacing: 10px;
+      &.coupon-111{
+        background-position: 0 0;
+      }
+      &.coupon-222{
+        background-position: 0 50%;
+      }
+      &.coupon-333{
+        background-position: 0% 100%;
+
+      }
     }
   }
 }
@@ -123,14 +147,32 @@ html,body{
 .btn-collection{
   text-align: center;
   .btn{
+    position: relative;
     display: inline-block;
     margin: 0.6rem 0.1rem;
     box-shadow: 0px 3px 13px #6e7173;
     @include background-image(linear-gradient(#fff, #ededed));
+    @include size(2.35rem,0.5rem);
+    span{
+      display: block;
+      text-indent: -999em;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%,-50%));
+      @include size(1.21rem,0.3rem);
+      background: url("../images/btns.png") no-repeat;
+      background-size: 100%;
+      &.btn-t2{
+        background-position: bottom center;
+      }
+    }
     &.disabled{
       color: rgba(110,85,73,0.3);
       @include background-image(linear-gradient(#e7e7e7, #fff));
-
+      span{
+        opacity: 0.5;
+      }
     }
   }
 }
@@ -141,13 +183,17 @@ html,body{
     text-align: center;
     font-size: 0.36rem;
     margin: 1rem auto 0.8rem;
+    @include size(3.58rem,1rem);
+    background: url("../images/next.png") no-repeat;
+    background-size: 3.58rem;
+    text-indent: -999em;
   }
   .qrcode{
     @include size(3.72rem,3.72rem);
     margin: 0 auto 0.8rem;
   }
   .next{
-    width: 2rem;
+    width: 3.58rem;
     margin: 0 auto;
     text-align: center;
     a{
@@ -155,6 +201,10 @@ html,body{
       color: #2c2b2b;
       font-size: 0.3rem;
       text-decoration: underline;
+      @include size(3.58rem,0.8rem);
+      background: url("../images/next.png") bottom center no-repeat;
+      background-size: 3.58rem;
+      text-indent: -999em;
     }
   }
 }

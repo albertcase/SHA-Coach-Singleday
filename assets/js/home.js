@@ -7,28 +7,61 @@
     'use strict';
     var controller = function(){
         this.moneyVal = 111;
+        /*我要翻倍按钮*/
         this.isGetCoupon = false;
+        /*我要领取按钮*/
+        this.isGetDouble = false;
     };
     controller.prototype.init = function(){
         var self = this;
 
-        Api.isLogin(function(data){
-            //has get money
-            if(data.status==1){
-                if(data.msg){
-                    self.updateCouponNumber(data.msg);
-                    $('.btn-collection .btn').removeClass('disabled');
-                    self.isGetCoupon = true;
-                }else{
-                    //    data msg is null or 0
-                    self.initCanvas();
-                }
-            }else{
-            //   not login,go auth page
-                window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
+        var baseurl = ''+'/dist/images/';
+        var imagesArray = [
+            baseurl + 'bg.jpg',
+            baseurl + 'coupon.png',
+            baseurl + 'btns.png',
+            baseurl + 'cbg.png',
+            baseurl + 'logo.png',
+            baseurl + 'mask.jpg',
+            baseurl + 'prize-bg.png',
+            baseurl + 'qrcode.jpg',
+            baseurl + 'share-tips.png',
+            baseurl + 'share.jpg',
+        ];
+        var i = 0;
+        new preLoader(imagesArray, {
+            onProgress: function(){
+                Common.msgBox.add('loading...');
+            },
+            onComplete: function(){
+                Api.isLogin(function(data){
+                    //has get money
+                    if(data.status==1){
+                        if(data.msg){
+                            self.updateCouponNumber(data.msg);
+                            $('.btn-collection .btn-get').removeClass('disabled');
+                            self.isGetCoupon=true;
+                            if(data.msg==333){
+                                self.isGetDouble = false;
+                                $('.btn-collection .btn-getdouble').addClass('disabled');
+                            }else{
+                                self.isGetDouble = true;
+                                $('.btn-collection .btn-getdouble').removeClass('disabled');
+                            }
+
+                        }else{
+                            //    data msg is null or 0
+                            self.initCanvas();
+                        }
+                    }else{
+                        //   not login,go auth page
+                        window.location.href = 'http://coach.samesamechina.com/api/wechat/oauth/auth/d6877db5-774d-43a3-8018-14b6b8a42b52';
+                    }
+                });
+                self.bindEvent();
             }
         });
-        self.bindEvent();
+
 
     };
 
@@ -44,6 +77,7 @@
         * ===*/
         var enableGet = true;
         $('.btn-get').on('touchstart',function(){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'BtnGetCoupon']);
             if(!(self.isGetCoupon && enableGet)) return;
             enableGet = false;
             Api.card(function(data){
@@ -89,7 +123,8 @@
          * ===*/
         //var enableDouble = true;
         $('.btn-getdouble').on('touchstart',function(){
-            if(!self.isGetCoupon) return;
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'BtnGetDoubleCoupon']);
+            if(!self.isGetDouble) return;
             //if(!enableDouble) return;
             //enableDouble = false;
             $('.pop-share').addClass('show');
@@ -103,6 +138,7 @@
          * Hide the pop share overlay
          * ===*/
         $('.pop-share').on('touchstart',function(){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'CloseSharePop']);
             self.hideSharePop();
         });
 
@@ -113,7 +149,7 @@
         //show the money in site
         self.moneyVal = val;
         $('.prize').addClass('show');
-        $('.prize .num').html(val);
+        $('.prize .num').addClass('coupon-'+val);
     };
     /*==================================
      * hide pop share
@@ -164,6 +200,7 @@
         //ask api just first time
         var enableSave = true;
         paintCanvas.addEventListener('touchstart',function(ev){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'PaintCoupon']);
             ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
             if(enableSave){
                 Api.saveTheMoney(function(data){
@@ -189,6 +226,7 @@
                 ctx.clearRect(0,0, parseInt(450*ratio), parseInt(228*ratio));
                 $('.btn-collection .btn').removeClass('disabled');
                 self.isGetCoupon = true;
+                self.isGetDouble = true;
                 console.log('yes');
                 enableRub = false;
             }
@@ -202,13 +240,14 @@
         var self = this;
         wx.ready(function(){
             wx.onMenuShareAppMessage({
-                title: 'COACH双十一献礼',
-                desc: 'COACH双十一献礼',
+                title: 'COACH双十一电子礼券',
+                desc: '电子礼券请收好，刮开还有机会把金额翻倍！尽情今日！',
                 link: 'http://ownthisday.samesamechina.com',
-                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
+                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/share.jpg',
                 type: '',
                 dataUrl: '',
                 success: function () {
+                    _hmt.push(['_trackEvent', 'buttons', 'click', 'DoubleShareAppMessage']);
                     self.shareSuccessCallback();
                 },
                 cancel: function () {
@@ -216,10 +255,11 @@
                 }
             });
             wx.onMenuShareTimeline({
-                title: 'COACH双十一献礼',
+                title: 'COACH双十一电子礼券',
                 link: 'http://ownthisday.samesamechina.com/',
-                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
+                imgUrl: 'http://ownthisday.samesamechina.com/dist/images/share.jpg',
                 success: function () {
+                    _hmt.push(['_trackEvent', 'buttons', 'click', 'DoubleShareTimeline']);
                     self.shareSuccessCallback();
                 },
                 cancel: function () {
@@ -234,10 +274,11 @@
      * ==================================*/
     controller.prototype.shareSuccessCallback=function(){
         var self = this;
-        self.updateCouponNumber('333');
         self.hideSharePop();
         Api.isShare(function(data){
-            console.log(data);
+            self.updateCouponNumber('333');
+            self.isGetDouble = false;
+            $('.btn-collection .btn-getdouble').addClass('disabled');
         });
     };
 
