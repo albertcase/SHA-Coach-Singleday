@@ -13,10 +13,11 @@ var rename = require('gulp-rename'),
 
 //Define the app path
 var path = {
-    all:['./*.html','./assets/css/*.css','./assets/js/*.js','./assets/js/lib/*.js'],
+    all:['./*.html','./assets/css/*.css','./assets/js/*.js'    ,'./assets/js/lib/*.js'],
     template:['./template/*.html'],
     css:['./assets/css/*.css'],
     js:['./assets/js/lib/zepto.min.js','./assets/js/rem.js','./assets/js/common.js','./assets/js/wxshare.js','./assets/js/api.js','./assets/js/home.js'],
+    qrjs:['./assets/js/lib/zepto.min.js','./assets/js/rem.js','./assets/js/wxshare.js','./assets/js/qr.js'],
     images:['./assets/images/*'],
     staticFolder:['./assets/images/*','./assets/font/*','./assets/video/*']
 };
@@ -46,7 +47,7 @@ gulp.task('images', ['clean'], function() {
 });
 
 //css
-gulp.task('css',function () {
+gulp.task('css',['clean'],function () {
     // 1. 找到文件
     gulp.src(path.css)
         //.pipe(concat('style.css'))
@@ -66,13 +67,23 @@ gulp.task('scripts',['clean'], function() {
         .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('scripts_qr',['clean'], function() {
+    return gulp.src(path.qrjs)
+        .pipe(concat('qr_all.js'))
+        .pipe(gulp.dest('dist'))
+        .pipe(rename('qr_all.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+});
+
 // Watch Files For Changes
-gulp.task('watch', function() {
+gulp.task('watch', ['clean'],function() {
     gulp.watch(path.js, ['scripts']);
+    gulp.watch(path.qrjs, ['scripts_qr']);
     gulp.watch(path.css,['css']);
     gulp.watch(path.images,['images']);
     gulp.watch(path.template,['css']);
 });
 
 // Default Task
-gulp.task('default', ['watch', 'scripts', 'images','css','browser-sync']);
+gulp.task('default', ['watch', 'scripts','scripts_qr','images','css','browser-sync']);

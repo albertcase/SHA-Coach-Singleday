@@ -44,6 +44,7 @@
         * ===*/
         var enableGet = true;
         $('.btn-get').on('touchstart',function(){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'BtnGetCoupon']);
             if(!(self.isGetCoupon && enableGet)) return;
             enableGet = false;
             Api.card(function(data){
@@ -89,6 +90,7 @@
          * ===*/
         //var enableDouble = true;
         $('.btn-getdouble').on('touchstart',function(){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'BtnGetDoubleCoupon']);
             if(!self.isGetCoupon) return;
             //if(!enableDouble) return;
             //enableDouble = false;
@@ -103,6 +105,7 @@
          * Hide the pop share overlay
          * ===*/
         $('.pop-share').on('touchstart',function(){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'CloseSharePop']);
             self.hideSharePop();
         });
 
@@ -164,6 +167,7 @@
         //ask api just first time
         var enableSave = true;
         paintCanvas.addEventListener('touchstart',function(ev){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'PaintCoupon']);
             ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
             if(enableSave){
                 Api.saveTheMoney(function(data){
@@ -209,6 +213,7 @@
                 type: '',
                 dataUrl: '',
                 success: function () {
+                    _hmt.push(['_trackEvent', 'buttons', 'click', 'DoubleShareAppMessage']);
                     self.shareSuccessCallback();
                 },
                 cancel: function () {
@@ -220,6 +225,7 @@
                 link: 'http://ownthisday.samesamechina.com/',
                 imgUrl: 'http://ownthisday.samesamechina.com/dist/images/logo.png',
                 success: function () {
+                    _hmt.push(['_trackEvent', 'buttons', 'click', 'DoubleShareTimeline']);
                     self.shareSuccessCallback();
                 },
                 cancel: function () {

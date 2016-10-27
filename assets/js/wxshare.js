@@ -9,7 +9,7 @@ $(document).ready(function(){
                 type: '',
                 dataUrl: '',
                 success: function () {
-                    console.log('share success to friend');
+                    _hmt.push(['_trackEvent', 'buttons', 'click', 'onMenuShareAppMessage']);
 
                 },
                 cancel: function () {
@@ -21,7 +21,7 @@ $(document).ready(function(){
                 link: obj.link,
                 imgUrl: obj.img,
                 success: function () {
-                    console.log('share success to timeline');
+                    _hmt.push(['_trackEvent', 'buttons', 'click', 'onMenuShareTimeline']);
                 },
                 cancel: function () {
 

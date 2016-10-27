@@ -9,6 +9,15 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="full-screen" content="yes">
     <link rel="stylesheet" type="text/css" href="/dist/css/style.css" />
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b7fb8de2334bc576a74a0596c90f3c71";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
     <script src="http://coach.samesamechina.com/api/v1/js/76a133ba-8a21-4b5c-91d1-acaefdb47977/wechat?debug=true"></script>
     <script type="text/javascript" src="/dist/js/all.min.js"></script>
 </head>
