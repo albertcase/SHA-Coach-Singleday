@@ -53,6 +53,7 @@
                         }else{
                             //    data msg is null or 0
                             self.initCanvas();
+                            self.GenerateCouponNumber();
                         }
                     }else{
                         //   not login,go auth page
@@ -169,6 +170,16 @@
         $('.prize').addClass('show');
         $('.prize .num').addClass('coupon-'+val);
     };
+
+    controller.prototype.GenerateCouponNumber=function(){
+        var self = this;
+        var newMoney = Math.floor(Math.random()*111)+111;
+        var average = 166;
+        newMoney = (newMoney>average)?222:111;
+        self.moneyVal = newMoney;
+        $('.prize').addClass('show');
+        $('.prize .num').addClass('coupon-'+newMoney);
+    };
     /*==================================
      * hide pop share
      * ==================================*/
@@ -216,22 +227,15 @@
         ctx.beginPath();
         ctx.lineWidth = 30;
         //ask api just first time
-        var enableSave = true;
+
         paintCanvas.addEventListener('touchstart',function(ev){
             _hmt.push(['_trackEvent', 'buttons', 'click', 'PaintCoupon']);
             ctx.moveTo(ev.changedTouches[0].clientX-offLeft,ev.changedTouches[0].clientY)-offTop;
-            if(enableSave){
-                Api.saveTheMoney(function(data){
-                    if(data.status){
-                        self.updateCouponNumber(data.msg);
-                    }
-                });
-                enableSave = false;
-            }
 
         });
 
         var enableRub = true;
+        var enableSave = true;
         paintCanvas.addEventListener('touchmove', function(ev) {
             if(!enableRub) return;
             ctx.globalCompositeOperation = 'destination-out';
@@ -246,6 +250,14 @@
                 self.isGetCoupon = true;
                 self.isGetDouble = true;
                 enableRub = false;
+                if(enableSave){
+                    enableSave = false;
+                    Api.saveTheMoney(self.moneyVal,function(data){
+                        if(data.status){
+                            console.log('yes');
+                        }
+                    });
+                }
                 self.shareSuccess();
             }
         });

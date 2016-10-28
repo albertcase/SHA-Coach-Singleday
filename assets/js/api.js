@@ -38,11 +38,12 @@ Api = {
     /*
     * when start paint the canvas, sent the money from backend
     * */
-    saveTheMoney:function(callback){
+    saveTheMoney:function(card,callback){
         $.ajax({
             url:'/api/savecard',
             type:'POST',
             dataType:'json',
+            data:{card:card},
             success:function(data){
                 return callback(data);
             }
