@@ -81,8 +81,15 @@ class ApiController extends Controller {
 		if (!$user) {
 			return $this->statusPrint(0, '未登录');
 		}
-		$number = rand(1,2);
-		$card = $number*111;
+		// $number = rand(1,2);
+		// $card = $number*111;
+		$request = $this->Request();
+		$fields = array(
+			'card' => array('notnull', '3')
+		);
+		$request->validation($fields);
+		$card = $request->query->get('card');
+		
 		$databaseapi = new \Lib\DatabaseAPI();	
 		$rs = $databaseapi->saveCard($user, $card);
 		setcookie('user_card', $rs, time()+3600*24*365);
