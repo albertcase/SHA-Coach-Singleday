@@ -695,8 +695,8 @@ Api = {
         });
 
 
-
     };
+
     controller.prototype.updateCouponNumber=function(val){
         var self = this;
         //show the money in site
@@ -705,6 +705,9 @@ Api = {
         $('.prize .num').addClass('coupon-'+val);
     };
 
+    /*==================================
+     * Generate number between 111 and 222 by random
+     * ==================================*/
     controller.prototype.GenerateCouponNumber=function(){
         var self = this;
         var newMoney = Math.floor(Math.random()*111)+111;
