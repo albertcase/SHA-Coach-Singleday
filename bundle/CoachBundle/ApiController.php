@@ -88,8 +88,8 @@ class ApiController extends Controller {
 			'card' => array('notnull', '3')
 		);
 		$request->validation($fields);
-		$card = $request->query->get('card');
-		
+		$card = $request->request->get('card');
+
 		$databaseapi = new \Lib\DatabaseAPI();	
 		$rs = $databaseapi->saveCard($user, $card);
 		setcookie('user_card', $rs, time()+3600*24*365);
