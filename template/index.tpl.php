@@ -49,7 +49,7 @@
             <img src="/dist/images/share-tips.png" alt=""/>
         </div>
     </div>
-    <div class="popup pop-rules show">
+    <div class="popup pop-rules">
         <div class="inner">
             <div class="btn-close"></div>
             <h3 class="rule-title">
