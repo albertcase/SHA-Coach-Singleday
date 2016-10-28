@@ -676,6 +676,24 @@ Api = {
         });
 
 
+        /*Show Rule Pop*/
+        $('.btn-rule').on('touchstart',function(){
+            _hmt.push(['_trackEvent', 'buttons', 'click', 'OpenRulePop']);
+            $('.pop-rules').addClass('show');
+        });
+
+        /*Close rule pop*/
+        $('.popup').on('touchstart',function(e){
+            e.stopPropagation();
+            if($(e.target).hasClass('pop-rules') || $(e.target).hasClass('btn-close')){
+                _hmt.push(['_trackEvent', 'buttons', 'click', 'CloseRulePop']);
+                $('.pop-rules').removeClass('show');
+            }
+
+        });
+
+
+
     };
     controller.prototype.updateCouponNumber=function(val){
         var self = this;
@@ -824,7 +842,6 @@ Api = {
     else {
         this.controller = controller;
     }
-
 
 }).call(this);
 
