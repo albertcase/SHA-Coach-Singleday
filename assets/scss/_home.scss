@@ -219,7 +219,7 @@ html,body{
 }
 .btn-toofficial{
   display: none;
-  @include size(1.87rem,0.8rem);
+  @include size(3.6rem,0.8rem);
   margin: 0 auto;
   &.show{
     display: block;

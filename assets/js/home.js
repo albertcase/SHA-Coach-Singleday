@@ -152,8 +152,8 @@
 
         /*Btn go to offical site*/
         $('.btn-toofficial a').on('touchstart',function(e){
-            _hmt.push(['_trackEvent', 'link', 'click', 'GoOfficialSite']);
             e.preventDefault();
+            _hmt.push(['_trackEvent', 'link', 'click', 'GoOfficialSite']);
             var redirectUrl = $(this).attr('href');
             window.location.href = redirectUrl;
         });
