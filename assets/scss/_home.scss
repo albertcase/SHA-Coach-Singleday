@@ -217,6 +217,21 @@ html,body{
     width: 100%;
   }
 }
+.btn-toofficial{
+  display: none;
+  @include size(1.87rem,0.8rem);
+  margin: 0.1rem auto;
+  &.show{
+    display: block;
+  }
+  a{
+    display: block;
+  }
+  img{
+    width: 100%;
+  }
+}
+
 
 //for pop-rules
 .pop-rules{

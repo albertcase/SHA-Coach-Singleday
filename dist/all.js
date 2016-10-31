@@ -684,6 +684,15 @@ Api = {
             $('.pop-rules').addClass('show');
         });
 
+        /*Btn go to offical site*/
+        $('.btn-toofficial a').on('touchstart',function(e){
+            _hmt.push(['_trackEvent', 'link', 'click', 'GoOfficialSite']);
+            e.preventDefault();
+            var redirectUrl = $(this).attr('href');
+            window.location.href = redirectUrl;
+        });
+
+
         /*Close rule pop*/
         $('.popup').on('touchstart',function(e){
             e.stopPropagation();
@@ -703,6 +712,11 @@ Api = {
         self.moneyVal = val;
         $('.prize').addClass('show');
         $('.prize .num').addClass('coupon-'+val);
+        // if value is 333,show go official site link
+        if(val==333){
+            $('.btn-rule').addClass('hide');
+            $('.btn-toofficial').addClass('show');
+        }
     };
 
     /*==================================

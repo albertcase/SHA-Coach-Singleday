@@ -739,6 +739,22 @@ html, body {
   width: 100%;
 }
 
+.btn-toofficial {
+  display: none;
+  width: 1.87rem;
+  height: 0.8rem;
+  margin: 0.1rem auto;
+}
+.btn-toofficial.show {
+  display: block;
+}
+.btn-toofficial a {
+  display: block;
+}
+.btn-toofficial img {
+  width: 100%;
+}
+
 .pop-rules .btn-close {
   opacity: 0.8;
   top: 0.04rem;
