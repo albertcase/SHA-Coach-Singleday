@@ -48,19 +48,19 @@ class WechatAPI {
     $api_url = 'http://coach.samesamechina.com/v2/wx/card/js/add/json?access_token='. CURIO_TOKEN;
     // 参数数组
     $data[] = array(
-            'card_id' => 'pKCDxjudoAbRiE0J-rnGg48emKIA',
+            'card_id' => 'pKCDxjtOAQdTE1b5yfQ6iyxxGIVI',
       //'card_id' => 'pKCDxjmRzfE5XdnYkXaZS1iAaCHQ',
             'code' => '',
             'openid' => ''
     );
     $data[] = array(
-            'card_id' => 'pKCDxjoOSPBiTasJ18-vUUdjOiVo',
+            'card_id' => 'pKCDxjupiNWtr-IP89e9qyEWaWvc',
       //'card_id' => 'pKCDxjmRzfE5XdnYkXaZS1iAaCHQ',
             'code' => '',
             'openid' => ''
     );
     $data[] = array(
-            'card_id' => 'pKCDxjlYWmhhXaOVauWoQVzT2zdY',
+            'card_id' => 'pKCDxjr2stjevIswJWak6wlIVAzE',
       //'card_id' => 'pKCDxjmRzfE5XdnYkXaZS1iAaCHQ',
             'code' => '',
             'openid' => ''
