@@ -150,6 +150,15 @@
             $('.pop-rules').addClass('show');
         });
 
+        /*Btn go to offical site*/
+        $('.btn-toofficial a').on('click',function(e){
+            e.preventDefault();
+            _hmt.push(['_trackEvent', 'link', 'click', 'GoOfficialSite']);
+            var redirectUrl = 'http://m.china.coach.com/shop/singlesday-hotsale.htm';
+            window.location.href = redirectUrl;
+        });
+
+
         /*Close rule pop*/
         $('.popup').on('touchstart',function(e){
             e.stopPropagation();
@@ -169,6 +178,11 @@
         self.moneyVal = val;
         $('.prize').addClass('show');
         $('.prize .num').addClass('coupon-'+val);
+        // if value is 333,show go official site link
+        if(val==333){
+            $('.btn-rule').addClass('hide');
+            $('.btn-toofficial').addClass('show');
+        }
     };
 
     /*==================================

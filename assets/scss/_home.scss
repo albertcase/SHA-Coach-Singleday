@@ -149,7 +149,7 @@ html,body{
   .btn{
     position: relative;
     display: inline-block;
-    margin: 0.6rem 0.1rem;
+    margin: 0.6rem 0.1rem 0.4rem;
     box-shadow: 0px 3px 13px #6e7173;
     @include background-image(linear-gradient(#fff, #ededed));
     @include size(2.35rem,0.5rem);
@@ -217,6 +217,21 @@ html,body{
     width: 100%;
   }
 }
+.btn-toofficial{
+  display: none;
+  @include size(3.6rem,0.8rem);
+  margin: 0 auto;
+  &.show{
+    display: block;
+  }
+  a,span{
+    display: block;
+  }
+  img{
+    width: 100%;
+  }
+}
+
 
 //for pop-rules
 .pop-rules{

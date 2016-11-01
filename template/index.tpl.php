@@ -42,6 +42,11 @@
             <div class="btn-rule">
                 <img src="/dist/images/btn-rule.png">
             </div>
+            <div class="btn-toofficial">
+                <span href="http://m.china.coach.com/shop/singlesday-hotsale.htm">
+                    <img src="/dist/images/linktoofficial.png">
+                </span>
+            </div>
         </div>
     </div>
     <div class="popup pop-share">
