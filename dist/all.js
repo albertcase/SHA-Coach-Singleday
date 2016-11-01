@@ -689,7 +689,7 @@ Api = {
             e.preventDefault();
             _hmt.push(['_trackEvent', 'link', 'click', 'GoOfficialSite']);
             var redirectUrl = 'http://m.china.coach.com/shop/singlesday-hotsale.htm';
-            window.location.href = ;
+            window.location.href = redirectUrl;
         });
 
 
