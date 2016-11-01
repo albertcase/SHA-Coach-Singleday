@@ -151,10 +151,10 @@
         });
 
         /*Btn go to offical site*/
-        $('.btn-toofficial a').on('touchstart',function(e){
+        $('.btn-toofficial a').on('click',function(e){
             e.preventDefault();
             _hmt.push(['_trackEvent', 'link', 'click', 'GoOfficialSite']);
-            var redirectUrl = $(this).attr('href');
+            var redirectUrl = 'http://m.china.coach.com/shop/singlesday-hotsale.htm';
             window.location.href = redirectUrl;
         });
 

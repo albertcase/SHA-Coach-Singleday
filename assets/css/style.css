@@ -748,7 +748,7 @@ html, body {
 .btn-toofficial.show {
   display: block;
 }
-.btn-toofficial a {
+.btn-toofficial a, .btn-toofficial span {
   display: block;
 }
 .btn-toofficial img {
